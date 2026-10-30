@@ -351,16 +351,69 @@
         </div>
     </section>
     <script>
-        const menuBtn = document.getElementById('menuBtn');
+                const menuBtn = document.getElementById('menuBtn');
         const navOverlay = document.getElementById('navOverlay');
+        const pageTitle = document.getElementById('pageTitle');
+        const pageSubtitle = document.getElementById('pageSubtitle');
 
+        // Menü Açma / Kapama Fonksiyonu
         function toggleMenu() {
             navOverlay.classList.toggle('active');
+            const spans = menuBtn.querySelectorAll('span');
+            if (navOverlay.classList.contains('active')) {
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
+            } else {
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+            }
         }
 
         menuBtn.addEventListener('click', toggleMenu);
 
-        // Menü linkleri (Ana Sayfa, Kullanım Koşulları, Gizlilik Politikası, Çocuk Güvenliği ve Hakkında) dinamik içerik değişimleri buraya eklenmiştir.
+        // YoHo.media ile Uyumlu Dinamik İçerik Havuzu (Metinlerin tam ve orijinal halleri için kaynak web dokümanlarına göz atabilirsiniz)
+        const contents = {
+            home: {
+                title: 'Yeni Arkadaşlar Bul. <br><span>Sesli Sohbet Et.</span>',
+                subtitle: 'TrLive, dünyanın her yerinden insanlarla güvenli ve eğlenceli odalarda bir araya gelebileceğiniz sesli eğlence platformudur.'
+            },
+            terms: {
+                title: 'TrLive <span>Terms of Service</span>',
+                subtitle: '18 yaşından küçükler kullanamaz. Güvenli ve arkadaş canlısı bir ortamın korunması amacıyla ticari kötüye kullanım yasaktır.'
+            },
+            privacy: {
+                title: 'TrLive <span>Privacy Policy</span>',
+                subtitle: 'Özel ses iletimleri sunucularda saklanmaz. Verileriniz güvenlik ve performans optimizasyonu için şifrelenir.'
+            },
+            childSafety: {
+                title: '<span>Child Safety Policy</span>',
+                subtitle: '18+ yaş sınırı zorunludur. Çocuk güvenliği konusunda sıfır tolerans politikası uygulanmaktadır.'
+            },
+            about: {
+                title: 'About <span>TrLive</span>',
+                subtitle: 'HD sesli sohbetin tadını çıkarın, yeni arkadaşlar edinin ve sanal hediyelerle etkileşimi artırın.'
+            }
+        };
+
+        // İçerik Güncelleme Fonksiyonu
+        function updateContent(key) {
+            if (contents[key]) {
+                pageTitle.innerHTML = contents[key].title;
+                pageSubtitle.innerHTML = contents[key].subtitle;
+                pageSubtitle.scrollTop = 0;
+                toggleMenu();
+            }
+        }
+
+        // Menü Linkleri Tanımlamaları
+        document.getElementById('homeLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('home'); });
+        document.getElementById('termsLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('terms'); });
+        document.getElementById('privacyLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('privacy'); });
+        document.getElementById('childSafetyLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('childSafety'); });
+        document.getElementById('aboutLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('about'); });
+
     </script>
 </body>
 </html>
