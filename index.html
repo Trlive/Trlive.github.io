@@ -6,269 +6,45 @@
     <title>TrLive - Voice & Video Chat Rooms</title>
     <style>
         :root {
-            --primary-color: #FFD200; /* YoHo Premium Yellow */
-            --dark-bg: #0A0A0A;      /* Deep Black */
-            --card-bg: #141414;      /* Obsidian Black */
+            --primary-color: #FFD200;
+            --dark-bg: #0A0A0A;
+            --card-bg: #141414;
             --text-color: #FFFFFF;
             --text-muted: #AAAAAA;
         }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 70px;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .menu-trigger {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 26px;
-            height: 18px;
-            z-index: 1002;
-        }
-
-        .menu-trigger span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: var(--text-color);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary-color);
-            letter-spacing: 1px;
-        }
-
-        .cta-header-btn {
-            background: var(--primary-color);
-            color: var(--dark-bg);
-            padding: 8px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            transition: transform 0.2s;
-        }
-
-        .cta-header-btn:hover {
-            transform: scale(1.05);
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--dark-bg); color: var(--text-color); overflow-x: hidden; }
+        header { position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+        .menu-trigger { cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; z-index: 1002; }
+        .menu-trigger span { display: block; height: 3px; width: 100%; background-color: var(--text-color); border-radius: 3px; transition: all 0.3s ease; }
+        .logo { font-size: 24px; font-weight: 800; color: var(--primary-color); letter-spacing: 1px; }
+        .cta-header-btn { background: var(--primary-color); color: var(--dark-bg); padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 14px; }
+        .nav-overlay { position: fixed; top: 0; left: -100%; width: 300px; height: 100vh; background-color: var(--card-bg); z-index: 1001; transition: left 0.4s ease; padding: 90px 30px 30px 30px; display: flex; flex-direction: column; justify-content: space-between; }
+        .nav-overlay.active { left: 0; }
+        .nav-menu-links a { display: block; color: var(--text-color); text-decoration: none; font-size: 16px; font-weight: 600; padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
+        .nav-menu-links a:hover { color: var(--primary-color); }
+        .nav-footer { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+        .nav-footer a { color: var(--primary-color); text-decoration: none; }
+        .main-wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 8% 60px 8%; max-width: 1200px; margin: 0 auto; }
+        .hero-text-side { width: 100%; text-align: center; margin-bottom: 50px; }
+        .hero-title { font-size: 3rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
+        .hero-title span { color: var(--primary-color); }
+        .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; max-width: 800px; margin: 0 auto; text-align: left; background: rgba(255, 255, 255, 0.02); padding: 25px; border-radius: 12px; border-left: 4px solid var(--primary-color); }
+        .slider-container { width: 100%; overflow-x: auto; display: flex; gap: 20px; padding-bottom: 30px; }
+        .slide-card { flex: 0 0 300px; background: var(--card-bg); border-radius: 16px; padding: 24px; border: 1px solid rgba(255, 255, 255, 0.03); }
+        .card-icon { font-size: 2rem; margin-bottom: 15px; display: inline-block; }
+        .card-tag { background: rgba(255, 208, 0, 0.1); color: var(--primary-color); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; display: inline-block; margin-bottom: 15px; }
+        .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
+        .card-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
+        .menu-backdrop { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
+        .menu-backdrop.active { opacity: 1; pointer-events: auto; }
+        @media (min-width: 992px) { .slider-container { display: grid; grid-template-columns: repeat(3, 1fr); } .slide-card { flex: none; } }
     </style>
 </head>
 <body>
-<style>
-    .nav-overlay {
-        position: fixed;
-        top: 0;
-        left: -100%;
-        width: 300px;
-        height: 100vh;
-        background-color: var(--card-bg);
-        z-index: 1001;
-        transition: left 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-        padding: 90px 30px 30px 30px;
-        box-shadow: 10px 0 35px rgba(0,0,0,0.8);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        border-right: 1px solid rgba(255, 255, 255, 0.02);
-    }
-
-    .nav-overlay.active {
-        left: 0;
-    }
-
-    .nav-menu-links a {
-        display: block;
-        color: var(--text-color);
-        text-decoration: none;
-        font-size: 16px;
-        font-weight: 600;
-        padding: 16px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        transition: color 0.2s;
-    }
-
-    .nav-menu-links a:hover {
-        color: var(--primary-color);
-    }
-
-    .nav-footer {
-        font-size: 12px;
-        color: var(--text-muted);
-        line-height: 1.6;
-    }
-
-    .nav-footer a {
-        color: var(--primary-color);
-        text-decoration: none;
-    }
-
-    .main-wrapper {
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 120px 8% 60px 8%;
-        max-width: 1200px;
-        margin: 0 auto;
-    }
-
-    .hero-text-side {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 50px;
-    }
-
-    .hero-title {
-        font-size: 3rem;
-        font-weight: 800;
-        margin-bottom: 20px;
-        line-height: 1.2;
-    }
-
-    .hero-title span {
-        color: var(--primary-color);
-    }
-
-    .hero-subtitle {
-        font-size: 1.15rem;
-        color: var(--text-muted);
-        line-height: 1.8;
-        max-width: 800px;
-        margin: 0 auto;
-        text-align: left;
-        background: rgba(255, 255, 255, 0.02);
-        padding: 25px;
-        border-radius: 12px;
-        border-left: 4px solid var(--primary-color);
-    }
-</style>
-<style>
-    .slider-container {
-        width: 100%;
-        overflow-x: auto;
-        display: flex;
-        gap: 20px;
-        padding: 10px 5px 30px 5px;
-        scroll-snap-type: x mandatory;
-        scrollbar-width: none;
-    }
-
-    .slider-container::-webkit-scrollbar {
-        display: none;
-    }
-
-    .slide-card {
-        flex: 0 0 300px;
-        scroll-snap-align: start;
-        background: var(--card-bg);
-        border-radius: 16px;
-        padding: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.03);
-        transition: transform 0.3s, border-color 0.3s;
-    }
-
-    .slide-card:hover {
-        transform: translateY(-5px);
-        border-color: var(--primary-color);
-    }
-
-    .card-icon {
-        font-size: 2rem;
-        margin-bottom: 15px;
-        display: inline-block;
-    }
-
-    .card-tag {
-        background: rgba(255, 208, 0, 0.1);
-        color: var(--primary-color);
-        font-size: 11px;
-        font-weight: 700;
-        padding: 4px 10px;
-        border-radius: 20px;
-        text-transform: uppercase;
-        display: inline-block;
-        margin-bottom: 15px;
-    }
-
-    .card-title {
-        font-size: 1.25rem;
-        font-weight: 700;
-        margin-bottom: 10px;
-    }
-
-    .card-desc {
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        line-height: 1.5;
-    }
-
-    .menu-backdrop {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(5px);
-        z-index: 999;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.3s ease;
-    }
-
-    .menu-backdrop.active {
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    @media (min-width: 992px) {
-        .slider-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            overflow-x: visible;
-        }
-        .slide-card {
-            flex: none;
-        }
-    }
-</style>
     <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
-
     <header>
-        <div class="menu-trigger" id="menuBtn">
+        <div class="menu-trigger" id="menuBtn" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
         <div class="logo">TrLive</div>
@@ -277,11 +53,11 @@
 
     <nav class="nav-overlay" id="navOverlay">
         <div class="nav-menu-links">
-            <a href="#" id="homeLink">Home</a>
-            <a href="#" id="termsLink">Terms of Service</a>
-            <a href="#" id="privacyLink">Privacy Policy</a>
-            <a href="#" id="childSafetyLink">Child Safety Policy</a>
-            <a href="#" id="aboutLink">About TrLive</a>
+            <a href="index.html">Home</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="child-safety.html">Child Safety Policy</a>
+            <a href="about.html">About TrLive</a>
         </div>
         <div class="nav-footer">
             <p>Support & Corporate:</p>
@@ -292,12 +68,11 @@
 
     <main class="main-wrapper">
         <section class="hero-text-side">
-            <h1 class="hero-title" id="pageTitle">Meet New Friends. <br><span>Voice & Video Chat.</span></h1>
-            <p class="hero-subtitle" id="pageSubtitle">TrLive is a next-generation real-time interactive entertainment ecosystem where you can gather with people worldwide in secure, crystal-clear social spaces.</p>
+            <h1 class="hero-title">Meet New Friends. <br><span>Voice & Video Chat.</span></h1>
+            <p class="hero-subtitle">TrLive is a next-generation real-time interactive entertainment ecosystem where you can gather with people worldwide in secure, crystal-clear social spaces.</p>
         </section>
 
-        <!-- YoHo Interactive Swipe Slider -->
-        <section class="slider-container" id="featuresSlider">
+        <section class="slider-container">
             <div class="slide-card">
                 <span class="card-icon">🎙️</span>
                 <div><span class="card-tag">Audio Hub</span></div>
@@ -318,94 +93,136 @@
             </div>
         </section>
     </main>
+
     <script>
-        const menuBtn = document.getElementById('menuBtn');
-        const navOverlay = document.getElementById('navOverlay');
-        const menuBackdrop = document.getElementById('menuBackdrop');
-        const pageTitle = document.getElementById('pageTitle');
-        const pageSubtitle = document.getElementById('pageSubtitle');
-        const featuresSlider = document.getElementById('featuresSlider');
-
         function toggleMenu() {
-            navOverlay.classList.toggle('active');
-            menuBackdrop.classList.toggle('active');
-            
-            const spans = menuBtn.querySelectorAll('span');
-            if (navOverlay.classList.contains('active')) {
-                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans[1].style.opacity = '0';
-                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
-            } else {
-                spans[0].style.transform = 'none';
-                spans[1].style.opacity = '1';
-                spans[2].style.transform = 'none';
-            }
+            document.getElementById('navOverlay').classList.toggle('active');
+            document.getElementById('menuBackdrop').classList.toggle('active');
         }
-
-        menuBtn.addEventListener('click', toggleMenu);
-    </script>
-</script> 
-    const termsText = `Welcome to TrLive. By accessing or using our Service, you agree to be bound by these Terms of Service. Please read them carefully before using our platform. If you do not agree to these terms, you may not access or use the Service.<br><br>
-<strong>1. Eligibility & Safety Requirement:</strong> You must be at least 18 years of age to create an account or use TrLive. By registering, you warrant that you have the full legal capacity to enter into this agreement. Any use of the platform by anyone under the age of 18 is strictly prohibited and constitutes a direct violation of these Terms.<br><br>
-<strong>2. User Conduct & Content Standards:</strong> TrLive provides a real-time voice and video communication environment. You retain sole responsibility for all audio streams, text messages, pictures, or data you broadcast. You explicitly agree not to post, stream, or transmit any material that is obscene, defamatory, hateful, racially or ethnically offensive, or encouraging criminal conduct. Pornography, sexual harassment, or verbal abuse in public or private chat rooms will result in immediate termination.<br><br>
-<strong>3. Commercial Restrictions:</strong> The Service is intended solely for personal, non-commercial use. Users are prohibited from using the platform for unauthorized advertising, marketing, or collecting user data for profit without written authorization from TrLive Management.<br><br>
-<strong>4. Monitoring & Enforcement:</strong> TrLive implements automated screening and active human moderation tools to monitor platform behavior. Reports submitted by users are thoroughly reviewed by our security response squad within 24 hours. We reserve the absolute right to ban any account, freeze internal assets, or block device hardware IDs permanently for serious violations. For disputes, contact trlivedestek@proton.me.`;
-const privacyText = `Your privacy is a fundamental pillar of our development philosophy. This Privacy Policy describes how TrLive manages, encrypts, and secures your digital footprint:<br><br>
-<strong>1. Data Collection Framework:</strong> When you register, we collect essential account information including your unique user ID, account nickname, profile picture, gender preference, and external social media token logs. We also log hardware-level details, device models, operating system versions, IP addresses, and performance metrics to prevent fraud and maintain stability.<br><br>
-<strong>2. Voice and Video Stream Privacy:</strong> TrLive uses peer-to-peer and cloud-relay infrastructure to transmit live audio and video communication packets instantly. Private 1-on-1 video chats and voice interactions are volatile and processed locally; they are never permanently recorded or stored on our central database servers.<br><br>
-<strong>3. Data Third-Party Controls & Sharing:</strong> We do not sell, rent, or lease user databases to commercial advertising brokers. Information is strictly shared with trusted processing partners (such as Apple App Store and Google Play Store for processing secure digital recharges) or law enforcement networks upon receiving explicit legal warrants. Data removal or modification requests can be processed via trlivedestek@proton.me.`;
-const childSafetyText = `TrLive maintains an absolute zero-tolerance mandate regarding any actions or communications that threaten the safety, well-being, or innocence of minors. We strictly implement the following digital safety architecture:<br><br>
-<strong>1. Absolute Age Restrictions:</strong> Our platform is designed and legally restricted to adult communities (18 years and older). We leverage multi-layered neural network face-analysis algorithms and manual gatekeeping to instantly isolate and block accounts suspected of belonging to minors during the onboarding process.<br><br>
-<strong>2. Radical Protection Measures:</strong> Any behavior indicating cyber-grooming, child exploitation, distributing or requesting inappropriate materials involving youth, or verbal harassment targeted toward young individuals will result in an immediate permanent hardware device ban. TrLive saves all relevant network trails, access logs, and registration info to share directly with global cybersecurity centers and local law enforcement authorities.<br><br>
-<strong>3. Instant Escalation Routes:</strong> Users are highly encouraged to use the dedicated in-app report mechanism. Emergency minor protection alerts are pushed directly to our priority rapid response unit. Direct email reports can be submitted to trlivedestek@proton.me.`;
-  const contents = {
-            home: {
-                title: 'Meet New Friends. <br><span>Voice & Video Chat.</span>',
-                subtitle: 'TrLive is a next-generation real-time interactive entertainment ecosystem where you can gather with people worldwide in secure, crystal-clear social spaces.',
-                showSlider: true
-            },
-            terms: {
-                title: 'TrLive <span>Terms of Service</span>',
-                subtitle: 'Welcome to TrLive. By accessing or using our platform applications, you agree to be bound by these Terms of Service.<br><br><strong>1. Eligibility Matrix:</strong> All users must be at least 18 years of age to register or initialize communications. Underage operations are forbidden.<br><br><strong>2. User Conduct:</strong> Abusive expressions, harassment, pornography, or extreme virtual parameters prompt terminal suspension.<br><br><strong>3. Penalization:</strong> Confirmed violations activate hardware bans. Reach out to trlivedestek@proton.me for compliance reports.',
-                showSlider: false
-            },
-            privacy: {
-                title: 'TrLive <span>Privacy Policy</span>',
-                subtitle: 'Your privacy parameters remain critical. This declaration structures our dynamic workflows handling fingerprints:<br><br><strong>1. Intake Streams:</strong> We compile profile credentials and device metadata points necessary to optimize connection hooks.<br><br><strong>2. Audio & Video Pipelines:</strong> Real-time streaming voice signals and video pipelines bounce across distributed relays. Private chat channels are volatile and bypass permanent data banks.<br><br><strong>3. Distribution Controls:</strong> We execute an outright restriction against data monetization. Access requests pass through trlivedestek@proton.me.',
-                showSlider: false
-            },
-            childSafety: {
-                title: '<span>Child Safety Policy</span>',
-                subtitle: 'TrLive operates under absolute zero-tolerance structural mechanisms regarding any parameters infringing upon the safety of minors:<br><br><strong>1. Age Barrier:</strong> The ecosystem is engineered for mature populations (18+). Neural identification networks instantly reject age-inconsistent user packets.<br><br><strong>2. Reporting Pipelines:</strong> Minor grooming patterns or explicit media distribution trigger permanent device ban. Logs pass to local cybercrime units.<br><br><strong>3. Escalation:</strong> Forward raw evidence nodes directly to trlivedestek@proton.me.',
-                showSlider: false
-            },
-            about: {
-                title: 'About <span>TrLive</span>',
-                subtitle: 'TrLive is a premier global real-time interactive entertainment ecosystem constructed utilizing cutting-edge audio and video transmission frameworks.<br><br>Our target is enabling hosts and esports broadcasting squads to create customizable visual rooms, interact via premium virtual gifting frameworks, and forge sustainable authentic connections.<br><br>With our latest 1-on-1 video integration modules, users can seamlessly transition beyond standard audio chat circles into face-to-face global engagement tracks. For collaboration parameters, reach us via trlivedestek@proton.me.',
-                showSlider: false
-            }
-        };
-
-        function updateContent(key) {
-            if (contents[key]) {
-                pageTitle.innerHTML = contents[key].title;
-                pageSubtitle.innerHTML = contents[key].subtitle;
-                
-                if (contents[key].showSlider) {
-                    featuresSlider.style.display = window.innerWidth >= 992 ? 'grid' : 'flex';
-                } else {
-                    featuresSlider.style.display = 'none';
-                }
-                toggleMenu();
-            }
-        }
-
-        document.getElementById('homeLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('home'); });
-        document.getElementById('termsLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('terms'); });
-        document.getElementById('privacyLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('privacy'); });
-        document.getElementById('childSafetyLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('childSafety'); });
-        document.getElementById('aboutLink').
-    
     </script>
 </body>
 </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - TrLive</title>
+    <style>
+        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Segoe UI', sans-serif; padding: 40px 5%; line-height: 1.8; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #FFD200; font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; }
+        h3 { color: #FFD200; margin-top: 25px; margin-bottom: 10px; }
+        p { color: #AAAAAA; margin-bottom: 20px; text-align: justify; }
+        .back-btn { display: inline-block; margin-bottom: 30px; color: #FFD200; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        <h1>TrLive Terms of Service</h1>
+        <p>Welcome to TrLive. By accessing or using our Service, you agree to be bound by these Terms of Service. Please read them carefully before using our platform. If you do not agree to these terms, you may not access or use the Service.</p>
+        
+        <h3>1. Eligibility & Safety Requirement</h3>
+        <p>You must be at least 18 years of age to create an account or use TrLive. By registering, you warrant that you have the full legal capacity to enter into this agreement. Any use of the platform by anyone under the age of 18 is strictly prohibited and constitutes a direct violation of these Terms.</p>
+        
+        <h3>2. User Conduct & Content Standards</h3>
+        <p>TrLive provides a real-time voice and video communication environment. You retain sole responsibility for all audio streams, text messages, pictures, or data you broadcast. You explicitly agree not to post, stream, or transmit any material that is obscene, defamatory, hateful, racially or ethnically offensive, or encouraging criminal conduct. Pornography, sexual harassment, or verbal abuse in public or private chat rooms will result in immediate termination.</p>
+        
+        <h3>3. Commercial Restrictions</h3>
+        <p>The Service is intended solely for personal, non-commercial use. Users are prohibited from using the platform for unauthorized advertising, marketing, or collecting user data for profit without written authorization from TrLive Management.</p>
+        
+        <h3>4. Monitoring & Enforcement</h3>
+        <p>TrLive implements automated screening and active human moderation tools to monitor platform behavior. Reports submitted by users are thoroughly reviewed by our security response squad within 24 hours. We reserve the absolute right to ban any account, freeze internal assets, or block device hardware IDs permanently for serious violations. For disputes, contact trlivedestek@proton.me.</p>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - TrLive</title>
+    <style>
+        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Segoe UI', sans-serif; padding: 40px 5%; line-height: 1.8; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #FFD200; font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; }
+        h3 { color: #FFD200; margin-top: 25px; margin-bottom: 10px; }
+        p { color: #AAAAAA; margin-bottom: 20px; text-align: justify; }
+        .back-btn { display: inline-block; margin-bottom: 30px; color: #FFD200; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        <h1>TrLive Privacy Policy</h1>
+        <p>Your privacy is a fundamental pillar of our development philosophy. This Privacy Policy describes how TrLive manages, encrypts, and secures your digital footprint.</p>
+        
+        <h3>1. Data Collection Framework</h3>
+        <p>When you register, we collect essential account information including your unique user ID, account nickname, profile picture, gender preference, and external social media token logs. We also log hardware-level details, device models, operating system versions, IP addresses, and performance metrics to prevent fraud and maintain stability.</p>
+        
+        <h3>2. Voice and Video Stream Privacy</h3>
+        <p>TrLive uses peer-to-peer and cloud-relay infrastructure to transmit live audio and video communication packets instantly. Private 1-on-1 video chats and voice interactions are volatile and processed locally; they are never permanently recorded or stored on our central database servers.</p>
+        
+        <h3>3. Data Third-Party Controls & Sharing</h3>
+        <p>We do not sell, rent, or lease user databases to commercial advertising brokers. Information is strictly shared with trusted processing partners (such as Apple App Store and Google Play Store for processing secure digital recharges) or law enforcement networks upon receiving explicit legal warrants. Data removal or modification requests can be processed via trlivedestek@proton.me.</p>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Child Safety Policy - TrLive</title>
+    <style>
+        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Segoe UI', sans-serif; padding: 40px 5%; line-height: 1.8; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #FFD200; font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; }
+        h3 { color: #FFD200; margin-top: 25px; margin-bottom: 10px; }
+        p { color: #AAAAAA; margin-bottom: 20px; text-align: justify; }
+        .back-btn { display: inline-block; margin-bottom: 30px; color: #FFD200; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        <h1>Child Safety Policy</h1>
+        <p>TrLive maintains an absolute zero-tolerance mandate regarding any actions or communications that threaten the safety, well-being, or innocence of minors. We strictly implement the following digital safety architecture:</p>
+        
+        <h3>1. Absolute Age Restrictions</h3>
+        <p>Our platform is designed and legally restricted to adult communities (18 years and older). We leverage multi-layered neural network face-analysis algorithms and manual gatekeeping to instantly isolate and block accounts suspected of belonging to minors during the onboarding process.</p>
+        
+        <h3>2. Radical Protection Measures</h3>
+        <p>Any behavior indicating cyber-grooming, child exploitation, distributing or requesting inappropriate materials involving youth, or verbal harassment targeted toward young individuals will result in an immediate permanent hardware device ban. TrLive saves all relevant network trails, access logs, and registration info to share directly with global cybersecurity centers and local law enforcement authorities.</p>
+        
+        <h3>3. Instant Escalation Routes</h3>
+        <p>Users are highly encouraged to use the dedicated in-app report mechanism. Emergency minor protection alerts are pushed directly to our priority rapid response unit. Direct email reports can be submitted to trlivedestek@proton.me.</p>
+    </div>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About TrLive</title>
+    <style>
+        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Segoe UI', sans-serif; padding: 40px 5%; line-height: 1.8; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #FFD200; font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; }
+        p { color: #AAAAAA; margin-bottom: 20px; text-align: justify; }
+        .back-btn { display: inline-block; margin-bottom: 30px; color: #FFD200; text-decoration: none; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Back to Home</a>
+        <h1>About TrLive</h1>
+        <p>TrLive is a premium global real-time interactive entertainment ecosystem constructed utilizing cutting-edge audio and video transmission frameworks.</p>
+        <p>Our target is the creation of a borderless social hub enabling casual hosts, independent artists, and esports broadcasting squads to create customizable visual rooms, interact via premium virtual gifting frameworks, and forge sustainable authentic connections.</p>
+        <p>With our latest 1-on-1 video integration modules, users can seamlessly transition beyond standard audio chat circles into comprehensive face-to-face global engagement tracks. For dynamic collaboration parameters or developer relationships, reach us via trlivedestek@proton.me.</p>
+    </div>
+</body>
+</html>
+
