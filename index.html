@@ -1,387 +1,233 @@
+
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrLive - Voice & Video Chat Rooms</title>
-    <style>
-        :root {
-            --primary-color: #FFD200; /* YoHo Premium Yellow */
-            --dark-bg: #0A0A0A;      /* Deep Black */
-            --card-bg: #141414;      /* Obsidian Black */
-            --text-color: #FFFFFF;
-            --text-muted: #AAAAAA;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-color);
-            overflow-x: hidden;
-        }
-
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 70px;
-            background: rgba(10, 10, 10, 0.85);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 5%;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .menu-trigger {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 26px;
-            height: 18px;
-            z-index: 1002;
-        }
-
-        .menu-trigger span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: var(--text-color);
-            border-radius: 3px;
-            transition: all 0.3s ease;
-        }
-
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary-color);
-            letter-spacing: 1px;
-        }
-
-        .cta-header-btn {
-            background: var(--primary-color);
-            color: var(--dark-bg);
-            padding: 8px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-        }
-
-        .nav-overlay {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 300px;
-            height: 100vh;
-            background-color: var(--card-bg);
-            z-index: 1001;
-            transition: left 0.4s ease;
-            padding: 90px 30px 30px 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .nav-overlay.active {
-            left: 0;
-        }
-
-        .nav-menu-links a {
-            display: block;
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 600;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .nav-menu-links a:hover {
-            color: var(--primary-color);
-        }
-
-        .nav-footer {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .nav-footer a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .main-wrapper {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 8% 60px 8%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .hero-text-side {
-            width: 100%;
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .hero-title {
-            font-size: 3rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-
-        .hero-title span {
-            color: var(--primary-color);
-        }
-
-        .hero-subtitle {
-            font-size: 1.15rem;
-            color: var(--text-muted);
-            line-height: 1.8;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 25px;
-            border-radius: 12px;
-            border-left: 4px solid var(--primary-color);
-        }
-
-        .slider-container {
-            width: 100%;
-            overflow-x: auto;
-            display: flex;
-            gap: 20px;
-            padding-bottom: 30px;
-        }
-
-        .slide-card {
-            flex: 0 0 300px;
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 24px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-        }
-
-        .card-icon {
-            font-size: 2rem;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-
-        .card-tag {
-            background: rgba(255, 208, 0, 0.1);
-            color: var(--primary-color);
-            font-size: 11px;
-            font-weight: 700;
-            padding: 4px 10px;
-            border-radius: 20px;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 15px;
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-
-        .card-desc {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            line-height: 1.5;
-        }
-
-        .policy-section {
-            padding: 80px 8%;
-            max-width: 800px;
-            margin: 0 auto;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .policy-section h2 {
-            color: var(--primary-color);
-            font-size: 2.2rem;
-            margin-bottom: 25px;
-            font-weight: 800;
-        }
-
-        .policy-section h3 {
-            color: var(--primary-color);
-            margin-top: 30px;
-            margin-bottom: 12px;
-            font-size: 1.3rem;
-        }
-
-        .policy-section p {
-            color: var(--text-muted);
-            line-height: 1.8;
-            margin-bottom: 18px;
-            text-align: justify;
-        }
-
-        .menu-backdrop {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: 999;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-
-        .menu-backdrop.active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        @media (min-width: 992px) {
-            .slider-container {
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-            }
-            .slide-card {
-                flex: none;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<meta name="description" content="TR Live ile sesli ve görüntülü sohbet odalarında tanış, sohbet et ve yeni arkadaşlıklar kur.">
+<title>TR Live | Birlikte Daha Yakın</title>
+<link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-    <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
-    <header>
-        <div class="menu-trigger" id="menuBtn" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
+
+<header class="header">
+  <a class="logo" href="index.html"><span>T</span> TR LIVE</a>
+
+  <nav id="navigation">
+    <a href="#features" data-tr="Özellikler" data-en="Features">Özellikler</a>
+    <a href="#screens" data-tr="Uygulamayı Keşfet" data-en="Explore">Uygulamayı Keşfet</a>
+    <a href="contact.html" data-tr="İletişim" data-en="Contact">İletişim</a>
+  </nav>
+
+  <select id="languageSelect" aria-label="Language">
+    <option value="tr">Türkçe</option>
+    <option value="en">English</option>
+  </select>
+
+  <button id="menuToggle" class="menu-toggle" aria-label="Menü">☰</button>
+</header>
+
+<main>
+
+<section class="hero">
+  <div class="hero-content">
+    <span class="eyebrow">WELCOME TO TR LIVE</span>
+
+    <h1 data-tr="Sohbetin yeni adresine <span>hoş geldin.</span>"
+        data-en="Your new place to <span>connect.</span>">
+      Sohbetin yeni adresine <span>hoş geldin.</span>
+    </h1>
+
+    <p data-tr="Sesli ve görüntülü sohbet odalarında insanlarla tanış, yeni arkadaşlıklar kur ve TR Live topluluğunun bir parçası ol."
+       data-en="Meet people, make new friends and become part of the TR Live community through live audio and video chat rooms.">
+      Sesli ve görüntülü sohbet odalarında insanlarla tanış,
+      yeni arkadaşlıklar kur ve TR Live topluluğunun bir parçası ol.
+    </p>
+
+    <a href="#screens" class="gold-button"
+       data-tr="Uygulamayı keşfet"
+       data-en="Explore the app">Uygulamayı keşfet</a>
+  </div>
+
+  <div class="showcase" id="screens">
+    <div class="phone-stage">
+
+      <!-- ANASAYFA -->
+      <article class="phone active" data-phone="0">
+        <div class="phone-screen">
+          <div class="status">9:41　● ● ●</div>
+          <div class="app-header">TR LIVE <span>♡　♧</span></div>
+          <div class="welcome">
+            <small>HOŞ GELDİN</small>
+            <h3>Merhaba!</h3>
+            <p>Bugün kimi tanımak istersin?</p>
+          </div>
+          <h4>Öne Çıkan Odalar</h4>
+          <div class="room-card">
+            <div class="room-picture gold-bg">🎙️</div>
+            <div><b>Arkadaşlarla Sohbet</b><small>Canlı sesli oda</small></div>
+          </div>
+          <div class="room-card">
+            <div class="room-picture purple-bg">🌟</div>
+            <div><b>Yeni İnsanlar</b><small>Herkese açık oda</small></div>
+          </div>
+          <h4>Senin İçin</h4>
+          <div class="quick-grid">
+            <div>🎧<small>Sesli Sohbet</small></div>
+            <div>📹<small>Görüntülü</small></div>
+          </div>
+          <div class="phone-nav">⌂　♡　◉　✉　●</div>
         </div>
-        <div class="logo">TrLive</div>
-        <a href="mailto:trlivedestek@proton.me" class="cta-header-btn">Contact Us</a>
-    </header>
+      </article>
 
-    <nav class="nav-overlay" id="navOverlay">
-        <div class="nav-menu-links">
-            <a href="#home" onclick="toggleMenu()">Home</a>
-            <a href="#terms" onclick="toggleMenu()">Terms of Service</a>
-            <a href="#privacy" onclick="toggleMenu()">Privacy Policy</a>
-            <a href="#child-safety" onclick="toggleMenu()">Child Safety Policy</a>
-            <a href="#about" onclick="toggleMenu()">About TrLive</a>
+      <!-- SESLİ ODA -->
+      <article class="phone" data-phone="1">
+        <div class="phone-screen">
+          <div class="status">9:41　● ● ●</div>
+          <div class="app-header">‹　 SESLİ ODA　•••</div>
+          <div class="room-heading">
+            <small>TR LIVE TOPLULUĞU</small>
+            <h3>Arkadaşlık Zamanı</h3>
+            <p>24 kişi odada</p>
+          </div>
+          <div class="mic-grid">
+            <div><span class="avatar a1">A</span><small>Akın</small></div>
+            <div><span class="avatar a2">M</span><small>Melis</small></div>
+            <div><span class="avatar a3">E</span><small>Emre</small></div>
+            <div><span class="avatar a4">S</span><small>Sena</small></div>
+            <div><span class="avatar a5">D</span><small>Deniz</small></div>
+            <div><span class="avatar a6">K</span><small>Kaan</small></div>
+          </div>
+          <div class="chat-preview"><b>Melis:</b> Herkese merhaba!</div>
+          <div class="room-controls">🎤　🎁　💬　＋</div>
         </div>
-        <div class="nav-footer">
-            <p>Support & Corporate:</p>
-            <a href="mailto:trlivedestek@proton.me">trlivedestek@proton.me</a>
-            <p style="margin-top: 15px; font-size: 10px;">© 2026 TrLive Platform</p>
+      </article>
+
+      <!-- GÖRÜNTÜLÜ ODA -->
+      <article class="phone" data-phone="2">
+        <div class="phone-screen video-screen">
+          <div class="status">9:41　● ● ●</div>
+          <div class="video-heading">
+            <small>TR LIVE</small>
+            <h3>Görüntülü Sohbet</h3>
+            <p>Canlı oda · 4 katılımcı</p>
+          </div>
+          <div class="video-grid">
+            <div class="video-tile v1"><span>Melis</span></div>
+            <div class="video-tile v2"><span>Emre</span></div>
+            <div class="video-tile v3"><span>Sena</span></div>
+            <div class="video-tile v4"><span>Deniz</span></div>
+          </div>
+          <div class="video-controls">🎤　📷　🔄　☎</div>
         </div>
-    </nav>
+      </article>
 
-    <main class="main-wrapper" id="home">
-        <section class="hero-text-side">
-            <h1 class="hero-title">Meet New Friends. <br><span>Voice & Video Chat.</span></h1>
-            <p class="hero-subtitle">TrLive is a next-generation real-time interactive entertainment ecosystem where you can gather with people worldwide in secure, crystal-clear social spaces.</p>
-        </section>
-
-        <section class="slider-container">
-            <div class="slide-card">
-                <span class="card-icon">🎙️</span>
-                <div><span class="card-tag">Audio Hub</span></div>
-                <h3 class="card-title">Group Voice Rooms</h3>
-                <p class="card-desc">Create your dynamic channel, launch audio parties, play interactive games, and send custom animated gifts seamlessly.</p>
+      <!-- KULLANICI PROFİLİ -->
+      <article class="phone" data-phone="3">
+        <div class="phone-screen">
+          <div class="status">9:41　● ● ●</div>
+          <div class="app-header">TR LIVE <span>⚙</span></div>
+          <div class="profile">
+            <div class="profile-avatar">M</div>
+            <h3>Melis</h3>
+            <p>TR Live kullanıcısı</p>
+            <div class="profile-stats">
+              <div><b>128</b><small>Takipçi</small></div>
+              <div><b>86</b><small>Takip</small></div>
+              <div><b>24</b><small>Anlar</small></div>
             </div>
-            <div class="slide-card">
-                <span class="card-icon">📸</span>
-                <div><span class="card-tag">Live Video</span></div>
-                <h3 class="card-title">1-on-1 Video Chat</h3>
-                <p class="card-desc">Connect face-to-face via high-definition, ultra-low latency interactive live video channels globally with absolute ease.</p>
-            </div>
-            <div class="slide-card">
-                <span class="card-icon">💎</span>
-                <div><span class="card-tag">Ecosystem</span></div>
-                <h3 class="card-title">Agency Hosting</h3>
-                <p class="card-desc">Expand your audience footprint, scale independent community administration networks, and leverage official partnership perks.</p>
-            </div>
-        </section>
-    </main>
-    <!-- TERMS OF SERVICE SECTION -->
-    <section class="policy-section" id="terms">
-        <h2>Terms of Service</h2>
-        <p>Welcome to TrLive. By accessing or using our Service, you agree to be bound by these Terms of Service. Please read them carefully before using our platform. If you do not agree to these terms, you may not access or use the Service.</p>
-        
-        <h3>1. Eligibility & Safety Requirement</h3>
-        <p>You must be at least 18 years of age to create an account or use TrLive. By registering, you warrant that you have the full legal capacity to enter into this agreement. Any use of the platform by anyone under the age of 18 is strictly prohibited and constitutes a direct violation of these Terms.</p>
-        
-        <h3>2. User Conduct & Content Standards</h3>
-        <p>TrLive provides a real-time voice and video communication environment. You retain sole responsibility for all audio streams, text messages, pictures, or data you broadcast. You explicitly agree not to post, stream, or transmit any material that is obscene, defamatory, hateful, racially or ethnically offensive, or encouraging criminal conduct. Pornography, sexual harassment, or verbal abuse in public or private chat rooms will result in immediate termination.</p>
-        
-        <h3>3. Commercial Restrictions</h3>
-        <p>The Service is intended solely for personal, non-commercial use. Users are prohibited from using the platform for unauthorized advertising, marketing, or collecting user data for profit without written authorization from TrLive Management.</p>
-        
-        <h3>4. Monitoring & Enforcement</h3>
-        <p>TrLive implements automated screening and active human moderation tools to monitor platform behavior. Reports submitted by users are thoroughly reviewed by our security response squad within 24 hours. We reserve the absolute right to ban any account, freeze internal assets, or block device hardware IDs permanently for serious violations. For disputes, contact trlivedestek@proton.me.</p>
-    </section>
+            <button class="profile-button">Profili Görüntüle</button>
+          </div>
+          <div class="profile-menu">
+            <div>👤　Profil bilgileri</div>
+            <div>🎁　Hediyeler</div>
+            <div>🖼️　Anlar</div>
+            <div>⚙　Ayarlar</div>
+          </div>
+          <div class="phone-nav">⌂　♡　◉　✉　●</div>
+        </div>
+      </article>
 
-    <!-- PRIVACY POLICY SECTION -->
-    <section class="policy-section" id="privacy">
-        <h2>Privacy Policy</h2>
-        <p>Your privacy is a fundamental pillar of our development philosophy. This Privacy Policy describes how TrLive manages, encrypts, and secures your digital footprint.</p>
-        
-        <h3>1. Data Collection Framework</h3>
-        <p>When you register, we collect essential account information including your unique user ID, account nickname, profile picture, gender preference, and external social media token logs. We also log hardware-level details, device models, operating system versions, IP addresses, and performance metrics to prevent fraud and maintain stability.</p>
-        
-        <h3>2. Voice and Video Stream Privacy</h3>
-        <p>TrLive uses peer-to-peer and cloud-relay infrastructure to transmit live audio and video communication packets instantly. Private 1-on-1 video chats and voice interactions are volatile and processed locally; they are never permanently recorded or stored on our central database servers.</p>
-        
-        <h3>3. Data Third-Party Controls & Sharing</h3>
-        <p>We do not sell, rent, or lease user databases to commercial advertising brokers. Information is strictly shared with trusted processing partners (such as Apple App Store and Google Play Store for processing secure digital recharges) or law enforcement networks upon receiving explicit legal warrants. Data removal or modification requests can be processed via trlivedestek@proton.me.</p>
-    </section>
+    </div>
 
-    <!-- CHILD SAFETY POLICY SECTION -->
-    <section class="policy-section" id="child-safety">
-        <h2>Child Safety Policy</h2>
-        <p>TrLive maintains an absolute zero-tolerance mandate regarding any actions or communications that threaten the safety, well-being, or innocence of minors. We strictly implement the following digital safety architecture:</p>
-        
-        <h3>1. Absolute Age Restrictions</h3>
-        <p>Our platform is designed and legally restricted to adult communities (18 years and older). We leverage multi-layered neural network face-analysis algorithms and manual gatekeeping to instantly isolate and block accounts suspected of belonging to minors during the onboarding process.</p>
-        
-        <h3>2. Radical Protection Measures</h3>
-        <p>Any behavior indicating cyber-grooming, child exploitation, distributing or requesting inappropriate materials involving youth, or verbal harassment targeted toward young individuals will result in an immediate permanent hardware device ban. TrLive saves all relevant network trails, access logs, and registration info to share directly with global cybersecurity centers and local law enforcement authorities.</p>
-        
-        <h3>3. Instant Escalation Routes</h3>
-        <p>Users are highly encouraged to use the dedicated in-app report mechanism. Emergency minor protection alerts are pushed directly to our priority rapid response unit. Direct email reports can be submitted to trlivedestek@proton.me.</p>
-    </section>
+    <div class="screen-indicators">
+      <button class="screen-dot active" data-screen="0" aria-label="Anasayfa"></button>
+      <button class="screen-dot" data-screen="1" aria-label="Sesli oda"></button>
+      <button class="screen-dot" data-screen="2" aria-label="Görüntülü oda"></button>
+      <button class="screen-dot" data-screen="3" aria-label="Profil"></button>
+    </div>
 
-    <!-- ABOUT SECTION -->
-    <section class="policy-section" id="about">
-        <h2>About TrLive</h2>
-        <p>TrLive is a premium global real-time interactive entertainment ecosystem constructed utilizing cutting-edge audio and video transmission frameworks.</p>
-        <p>Our target is the creation of a borderless social hub enabling casual hosts, independent artists, and esports broadcasting squads to create customizable visual rooms, interact via premium virtual gifting frameworks, and forge sustainable authentic connections.</p>
-        <p>With our latest 1-on-1 video integration modules, users can seamlessly transition beyond standard audio chat circles into comprehensive face-to-face global engagement tracks. For dynamic collaboration parameters or developer relationships, reach us via trlivedestek@proton.me.</p>
-    </section>
+    <p id="screenLabel" class="screen-label">Anasayfa</p>
+  </div>
+</section>
 
-    <script>
-        function toggleMenu() {
-            document.getElementById('navOverlay').classList.toggle('active');
-            document.getElementById('menuBackdrop').classList.toggle('active');
-        }
-    </script>
+<section class="features" id="features">
+  <div class="section-title">
+    <span class="eyebrow">TR LIVE EXPERIENCE</span>
+    <h2 data-tr="Bir araya gelmenin yeni yolu"
+        data-en="A new way to connect">Bir araya gelmenin yeni yolu</h2>
+    <p data-tr="Sohbet et, paylaş ve yeni insanlarla tanış."
+       data-en="Chat, share and meet new people.">
+      Sohbet et, paylaş ve yeni insanlarla tanış.
+    </p>
+  </div>
+
+  <div class="feature-grid">
+    <article class="feature-card">
+      <div class="feature-icon">🎙️</div>
+      <h3>Sesli Odalar</h3>
+      <p>Canlı sesli sohbetlere katıl ve yeni topluluklarla tanış.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-icon">📹</div>
+      <h3>Görüntülü Odalar</h3>
+      <p>Görüntülü sohbet ile iletişimini daha yakın hale getir.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-icon">💬</div>
+      <h3>Mesajlaşma</h3>
+      <p>Arkadaşlarınla mesajlaş ve iletişimde kal.</p>
+    </article>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <span class="eyebrow">ABOUT TR LIVE</span>
+  <h2>TR Live ile bağlantıda kal.</h2>
+  <p>TR Live, kullanıcıların sesli ve görüntülü sohbet odalarında
+  iletişim kurabilmesi için tasarlanan sosyal bir platformdur.</p>
+</section>
+
+<section class="download">
+  <span class="eyebrow">JOIN THE COMMUNITY</span>
+  <h2>Sohbet şimdi başlıyor.</h2>
+  <p>TR Live topluluğuna katıl.</p>
+  <span class="coming-soon">ÇOK YAKINDA</span>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-brand">TR <strong>LIVE</strong></div>
+
+  <div class="footer-links">
+    <a href="privacy.html">Gizlilik Politikası</a>
+    <a href="terms.html">Kullanım Koşulları</a>
+    <a href="refund.html">İade ve Ödeme Politikası</a>
+    <a href="account-deletion.html">Hesap Silme</a>
+    <a href="child-safety.html">Çocuk Güvenliği</a>
+    <a href="community.html">Topluluk Kuralları</a>
+    <a href="cookies.html">Çerez Politikası</a>
+    <a href="contact.html">İletişim ve Şirket Bilgileri</a>
+  </div>
+
+  <p>© <span id="currentYear"></span> Trlive Digital LLC. All rights reserved.</p>
+  <p>Destek: <a href="mailto:trlivedestek@proton.me">trlivedestek@proton.me</a></p>
+</footer>
+
+<script src="assets/js/main.js"></script>
 </body>
 </html>
