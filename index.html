@@ -1,24 +1,23 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrLive - Sesli Sohbet Odaları & Canlı Yayın</title>
+    <title>TrLive - Voice & Video Chat Rooms</title>
     <style>
         :root {
-            --primary-color: #6C5CE7;
-            --secondary-color: #a29bfe;
-            --dark-bg: #090A0F;
-            --card-bg: #141622;
+            --primary-color: #FFD200; /* YoHo Premium Yellow */
+            --dark-bg: #0A0A0A;      /* Deep Black */
+            --card-bg: #141414;      /* Obsidian Black */
             --text-color: #FFFFFF;
-            --text-muted: #8F92A1;
+            --text-muted: #AAAAAA;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -34,14 +33,14 @@
             left: 0;
             width: 100%;
             height: 70px;
-            background: rgba(9, 10, 15, 0.85);
+            background: rgba(10, 10, 10, 0.85);
             backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: space-between;
             padding: 0 5%;
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
         }
 
         .menu-trigger {
@@ -66,365 +65,333 @@
         .logo {
             font-size: 24px;
             font-weight: 800;
-            background: linear-gradient(45deg, #FF7675, #6C5CE7);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary-color);
             letter-spacing: 1px;
         }
 
         .cta-header-btn {
             background: var(--primary-color);
-            color: white;
+            color: var(--dark-bg);
             padding: 8px 20px;
             border-radius: 20px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             font-size: 14px;
+            transition: transform 0.2s;
         }
 
-        .nav-overlay {
-            position: fixed;
-            top: 0;
-            left: -100%;
-            width: 280px;
-            height: 100vh;
-            background-color: var(--card-bg);
-            z-index: 1001;
-            transition: left 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
-            padding: 90px 30px 30px 30px;
-            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .nav-overlay.active {
-            left: 0;
-        }
-
-        .nav-menu-links a {
-            display: block;
-            color: var(--text-color);
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            transition: color 0.2s;
-        }
-
-        .nav-menu-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        .nav-footer {
-            font-size: 12px;
-            color: var(--text-muted);
-            line-height: 1.6;
-        }
-
-        .nav-footer a {
-            color: var(--secondary-color);
-            text-decoration: none;
-        }
-
-        .hero-container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 120px 5% 60px 5%;
-            text-align: center;
-        }
-
-        .hero-text-side {
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .hero-title {
-            font-size: 2.4rem;
-            font-weight: 800;
-            margin-bottom: 15px;
-            line-height: 1.3;
-        }
-
-        .hero-title span {
-            color: var(--secondary-color);
-        }
-
-        .hero-subtitle {
-            font-size: 1rem;
-            color: var(--text-muted);
-            margin-bottom: 40px;
-            line-height: 1.6;
-            text-align: justify;
-            background: rgba(255,255,255,0.01);
-            padding: 15px;
-            border-radius: 8px;
-            max-height: 350px;
-            overflow-y: auto;
-        }
-
-        .phone-wrapper {
-            position: relative;
-            width: 310px;
-            height: 620px;
-            background: #222538;
-            border: 11px solid #333852;
-            border-radius: 40px;
-            box-shadow: 0 25px 50px -12px rgba(108, 92, 231, 0.25);
-            overflow: hidden;
-            margin-top: 30px;
-        }
-
-        .phone-notch {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 130px;
-            height: 18px;
-            background: #333852;
-            border-bottom-left-radius: 15px;
-            border-bottom-right-radius: 15px;
-            z-index: 10;
-        }
-
-        .app-screen {
-            width: 100%;
-            height: 100%;
-            background: #0F111A;
-            padding: 25px 12px 12px 12px;
-            display: flex;
-            flex-direction: column;
-            text-align: left;
-        }
-
-        .app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-top: 5px; }
-        .app-logo { font-weight: bold; font-size: 16px; color: #fff; }
-        .app-tabs { display: flex; gap: 12px; margin-bottom: 15px; }
-        .app-tab { font-size: 12px; font-weight: 600; color: var(--text-muted); padding-bottom: 4px; }
-        .app-tab.active { color: #fff; border-bottom: 2px solid var(--primary-color); }
-        .room-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        
-        .room-card {
-            background: #181B2A;
-            border-radius: 14px;
-            padding: 10px;
-            position: relative;
-            height: 125px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .room-tag {
-            position: absolute;
-            top: 8px;
-            right: 8px;
-            background: rgba(108, 92, 231, 0.2);
-            color: var(--secondary-color);
-            font-size: 9px;
-            padding: 2px 6px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .room-avatar-group { display: flex; align-items: center; gap: 6px; margin-top: 15px; }
-        .room-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(45deg, #fdcb6e, #e17055); }
-        .room-avatar.blue { background: linear-gradient(45deg, #74b9ff, #0984e3); }
-        .room-avatar.purple { background: linear-gradient(45deg, #a29bfe, #6C5CE7); }
-        .room-avatar.green { background: linear-gradient(45deg, #55efc4, #00b894); }
-        .room-user-count { font-size: 9px; color: var(--text-muted); }
-        .room-title { font-size: 11px; font-weight: 600; }
-
-        .gift-pop {
-            background: linear-gradient(90deg, rgba(255,118,117,0.15), rgba(108,92,231,0.15));
-            border: 1px solid rgba(255,118,117,0.3);
-            border-radius: 10px;
-            padding: 6px;
-            margin-top: auto;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .gift-icon { width: 20px; height: 20px; background: #ff7675; border-radius: 4px; }
-        .gift-text { font-size: 9px; line-height: 1.2; }
-
-        @media (min-width: 768px) {
-            .hero-container { flex-direction: row; text-align: left; justify-content: space-between; gap: 5%; padding: 120px 8% 60px 8%; }
-            .hero-text-side { flex: 1; max-width: 550px; }
-            .hero-title { font-size: 3.5rem; }
-            .phone-wrapper { margin-top: 0; }
+        .cta-header-btn:hover {
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
+<style>
+    .nav-overlay {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 300px;
+        height: 100vh;
+        background-color: var(--card-bg);
+        z-index: 1001;
+        transition: left 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+        padding: 90px 30px 30px 30px;
+        box-shadow: 10px 0 35px rgba(0,0,0,0.8);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-right: 1px solid rgba(255, 255, 255, 0.02);
+    }
+
+    .nav-overlay.active {
+        left: 0;
+    }
+
+    .nav-menu-links a {
+        display: block;
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 600;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        transition: color 0.2s;
+    }
+
+    .nav-menu-links a:hover {
+        color: var(--primary-color);
+    }
+
+    .nav-footer {
+        font-size: 12px;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .nav-footer a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    .main-wrapper {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 120px 8% 60px 8%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .hero-text-side {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+
+    .hero-title span {
+        color: var(--primary-color);
+    }
+
+    .hero-subtitle {
+        font-size: 1.15rem;
+        color: var(--text-muted);
+        line-height: 1.8;
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: left;
+        background: rgba(255, 255, 255, 0.02);
+        padding: 25px;
+        border-radius: 12px;
+        border-left: 4px solid var(--primary-color);
+    }
+</style>
+<style>
+    .slider-container {
+        width: 100%;
+        overflow-x: auto;
+        display: flex;
+        gap: 20px;
+        padding: 10px 5px 30px 5px;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+    }
+
+    .slider-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .slide-card {
+        flex: 0 0 300px;
+        scroll-snap-align: start;
+        background: var(--card-bg);
+        border-radius: 16px;
+        padding: 24px;
+        border: 1px solid rgba(255, 255, 255, 0.03);
+        transition: transform 0.3s, border-color 0.3s;
+    }
+
+    .slide-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--primary-color);
+    }
+
+    .card-icon {
+        font-size: 2rem;
+        margin-bottom: 15px;
+        display: inline-block;
+    }
+
+    .card-tag {
+        background: rgba(255, 208, 0, 0.1);
+        color: var(--primary-color);
+        font-size: 11px;
+        font-weight: 700;
+        padding: 4px 10px;
+        border-radius: 20px;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-bottom: 15px;
+    }
+
+    .card-title {
+        font-size: 1.25rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+
+    .card-desc {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+
+    .menu-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(5px);
+        z-index: 999;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+
+    .menu-backdrop.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    @media (min-width: 992px) {
+        .slider-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            overflow-x: visible;
+        }
+        .slide-card {
+            flex: none;
+        }
+    }
+</style>
+    <div class="menu-backdrop" id="menuBackdrop" onclick="toggleMenu()"></div>
 
     <header>
         <div class="menu-trigger" id="menuBtn">
             <span></span><span></span><span></span>
         </div>
         <div class="logo">TrLive</div>
-        <a href="mailto:trlivedestek@proton.me" class="cta-header-btn">Bize Yazın</a>
+        <a href="mailto:trlivedestek@proton.me" class="cta-header-btn">Contact Us</a>
     </header>
 
-    <!-- YoHo Stili Yenilenen Sol Menü Hiyerarşisi -->
     <nav class="nav-overlay" id="navOverlay">
         <div class="nav-menu-links">
-            <a href="#" id="homeLink">Ana Sayfa</a>
-            <a href="#" id="termsLink">Kullanım Koşulları (Terms)</a>
-            <a href="#" id="privacyLink">Gizlilik Politikası (Privacy)</a>
-            <a href="#" id="childSafetyLink">Çocuk Güvenliği Politikası (Child Safety Policy)</a>
-            <a href="#" id="aboutLink">TrLive Hakkında (About TrLive)</a>
+            <a href="#" id="homeLink">Home</a>
+            <a href="#" id="termsLink">Terms of Service</a>
+            <a href="#" id="privacyLink">Privacy Policy</a>
+            <a href="#" id="childSafetyLink">Child Safety Policy</a>
+            <a href="#" id="aboutLink">About TrLive</a>
         </div>
         <div class="nav-footer">
-            <p>Destek ve Kurumsal İletişim:</p>
+            <p>Support & Corporate:</p>
             <a href="mailto:trlivedestek@proton.me">trlivedestek@proton.me</a>
             <p style="margin-top: 15px; font-size: 10px;">© 2026 TrLive Platform</p>
         </div>
     </nav>
 
-    <section class="hero-container">
-        <div class="hero-text-side">
-            <h1 class="hero-title" id="pageTitle">Yeni Arkadaşlar Bul. <br><span>Sesli Sohbet Et.</span></h1>
-            <p class="hero-subtitle" id="pageSubtitle">TrLive, dünyanın her yerinden insanlarla güvenli, kesintisiz ve eğlenceli odalarda bir araya gelebileceğiniz yeni nesil sesli eğlence ve topluluk yönetim platformudur.</p>
-        </div>
+    <main class="main-wrapper">
+        <section class="hero-text-side">
+            <h1 class="hero-title" id="pageTitle">Meet New Friends. <br><span>Voice & Video Chat.</span></h1>
+            <p class="hero-subtitle" id="pageSubtitle">TrLive is a next-generation real-time interactive entertainment ecosystem where you can gather with people worldwide in secure, crystal-clear social spaces.</p>
+        </section>
 
-        <div class="phone-wrapper">
-            <div class="phone-notch"></div>
-            <div class="app-screen">
-                <div class="app-header">
-                    <div class="app-logo">TrLive</div>
-                    <div style="font-size: 12px;">🔍 🔔</div>
-                </div>
-                <div class="app-tabs">
-                    <div class="app-tab active">Popüler</div>
-                    <div class="app-tab">Canlı</div>
-                    <div class="app-tab">Odalar</div>
-                </div>
-                <div class="room-grid">
-                    <div class="room-card">
-                        <span class="room-tag">Sohbet</span>
-                        <div class="room-avatar-group">
-                            <div class="room-avatar"></div>
-                            <span class="room-user-count">🔥 4.2k</span>
-                        </div>
-                        <div class="room-title">Dostluk Mekanı 🎙️</div>
-                    </div>
-                    <div class="room-card">
-                        <span class="room-tag">Müzik</span>
-                        <div class="room-avatar-group">
-                            <div class="room-avatar blue"></div>
-                            <span class="room-user-count">🔥 1.9k</span>
-                        </div>
-                        <div class="room-title">Akustik Canlı</div>
-                    </div>
-                    <div class="room-card">
-                        <span class="room-tag">Oyun</span>
-                        <div class="room-avatar-group">
-                            <div class="room-avatar purple"></div>
-                            <span class="room-user-count">🔥 2.8k</span>
-                        </div>
-                        <div class="room-title">E-Sport Odası</div>
-                    </div>
-                    <div class="room-card">
-                        <span class="room-tag">Ajans</span>
-                        <div class="room-avatar-group">
-                            <div class="room-avatar green"></div>
-                            <span class="room-user-count">🔥 5.1k</span>
-                        </div>
-                        <div class="room-title">Resmi Yayın Odası</div>
-                    </div>
-                </div>
-
-                <div class="gift-pop">
-                    <div class="gift-icon"></div>
-                    <div class="gift-text">
-                        <strong style="color: #fdcb6e;">Kullanıcı_77</strong><br>Kutup Yıldızı gönderdi!
-                    </div>
-                </div>
+        <!-- YoHo Interactive Swipe Slider -->
+        <section class="slider-container" id="featuresSlider">
+            <div class="slide-card">
+                <span class="card-icon">🎙️</span>
+                <div><span class="card-tag">Audio Hub</span></div>
+                <h3 class="card-title">Group Voice Rooms</h3>
+                <p class="card-desc">Create your dynamic channel, launch audio parties, play interactive games, and send custom animated gifts seamlessly.</p>
             </div>
-        </div>
-    </section>
-    <script>        const menuBtn = document.getElementById('menuBtn');
+            <div class="slide-card">
+                <span class="card-icon">📸</span>
+                <div><span class="card-tag">Live Video</span></div>
+                <h3 class="card-title">1-on-1 Video Chat</h3>
+                <p class="card-desc">Connect face-to-face via high-definition, ultra-low latency interactive live video channels globally with absolute ease.</p>
+            </div>
+            <div class="slide-card">
+                <span class="card-icon">💎</span>
+                <div><span class="card-tag">Ecosystem</span></div>
+                <h3 class="card-title">Agency Hosting</h3>
+                <p class="card-desc">Expand your audience footprint, scale independent community administration networks, and leverage official partnership perks.</p>
+            </div>
+        </section>
+    </main>
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
         const navOverlay = document.getElementById('navOverlay');
+        const menuBackdrop = document.getElementById('menuBackdrop');
         const pageTitle = document.getElementById('pageTitle');
         const pageSubtitle = document.getElementById('pageSubtitle');
+        const featuresSlider = document.getElementById('featuresSlider');
 
-        // Menü Açma / Kapama ve Hamburger Animasyonu
         function toggleMenu() {
             navOverlay.classList.toggle('active');
+            menuBackdrop.classList.toggle('active');
+            
             const spans = menuBtn.querySelectorAll('span');
             if (navOverlay.classList.contains('active')) {
-                spans.style.transform = 'rotate(45deg) translate(5px, 5px)';
-                spans.style.opacity = '0';
-                spans.style.transform = 'rotate(-45deg) translate(6px, -6px)';
+                spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+                spans[1].style.opacity = '0';
+                spans[2].style.transform = 'rotate(-45deg) translate(6px, -6px)';
             } else {
-                spans.style.transform = 'none';
-                spans.style.opacity = '1';
-                spans.style.transform = 'none';
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
             }
         }
 
         menuBtn.addEventListener('click', toggleMenu);
-
-        // TrLive Kurumsal Kimliğine Göre Güncellenmiş İçerik Havuzu
+    </script>
+    <script>
         const contents = {
             home: {
-                title: 'Yeni Arkadaşlar Bul. <br><span>Sesli Sohbet Et.</span>',
-                subtitle: 'TrLive, dünyanın her yerinden insanlarla güvenli, kesintisiz ve eğlenceli odalarda bir araya gelebileceğiniz yeni nesil sesli eğlence ve topluluk yönetim platformudur.'
+                title: 'Meet New Friends. <br><span>Voice & Video Chat.</span>',
+                subtitle: 'TrLive is a next-generation real-time interactive entertainment ecosystem where you can gather with people worldwide in secure, crystal-clear social spaces.',
+                showSlider: true
             },
             terms: {
                 title: 'TrLive <span>Terms of Service</span>',
-                subtitle: 'Welcome to TrLive. By accessing or using our Service, you agree to be bound by these Terms of Service. If you do not agree to all of these terms, do not use the Service.<br><br>' +
-                          '<strong>1. Service Eligibility:</strong> You must be at least 18 years of age to create an account and use the platform. Any access by anyone under 18 is strictly prohibited.<br><br>' +
-                          '<strong>2. User Content & Conduct:</strong> You are solely responsible for any text, voice recordings, or materials you share. You agree not to post objectionable content, including pornography, abusive language, violence, or discriminatory materials. TrLive maintains a zero-tolerance policy against abusive behaviors.<br><br>' +
-                          '<strong>3. Enforcement & Account Violations:</strong> We reserve the right to review reported violations within 24 hours. Failure to comply with platform guidelines will lead to the immediate blocking of your User ID or physical device restrictions. For questions regarding your account status, contact us at trlivedestek@proton.me.'
+                subtitle: 'Welcome to TrLive. By accessing or using our platform applications, you agree to be bound by these Terms of Service.<br><br><strong>1. Eligibility Matrix:</strong> All users must be at least 18 years of age to register or initialize communications. Underage operations are forbidden.<br><br><strong>2. User Conduct:</strong> Abusive expressions, harassment, pornography, or extreme virtual parameters prompt terminal suspension.<br><br><strong>3. Penalization:</strong> Confirmed violations activate hardware bans. Reach out to trlivedestek@proton.me for compliance reports.',
+                showSlider: false
             },
             privacy: {
                 title: 'TrLive <span>Privacy Policy</span>',
-                subtitle: 'Your privacy is paramount to us. This Privacy Policy describes how we collect, use, and safe-keep your digital footprints.<br><br>' +
-                          '<strong>1. Information Collection:</strong> We collect essential account registration details (such as your social media import ID, optional phone number, and nickname), device-specific network data, and usage metrics to optimize connection stability.<br><br>' +
-                          '<strong>2. Real-Time Communication Data:</strong> To provide a safe social live space, public audio stream packets are transmitted instantly. Private, unrecorded voice rooms are processed temporarily and are not stored permanently on our central database servers.<br><br>' +
-                          '<strong>3. Data Protection & Sharing:</strong> We do not sell or trade your data to third-party brokers. Data may only be shared with verified service vendors (like Google or Apple for billing processing) or strictly under legal enforcement compliance. If you want to request data deletion, please contact trlivedestek@proton.me.'
+                subtitle: 'Your privacy parameters remain critical. This declaration structures our dynamic workflows handling fingerprints:<br><br><strong>1. Intake Streams:</strong> We compile profile credentials and device metadata points necessary to optimize connection hooks.<br><br><strong>2. Audio & Video Pipelines:</strong> Real-time streaming voice signals and video pipelines bounce across distributed relays. Private chat channels are volatile and bypass permanent data banks.<br><br><strong>3. Distribution Controls:</strong> We execute an outright restriction against data monetization. Access requests pass through trlivedestek@proton.me.',
+                showSlider: false
             },
             childSafety: {
                 title: '<span>Child Safety Policy</span>',
-                subtitle: 'TrLive is strictly dedicated to maintaining an online space where minor exploitation is fundamentally eliminated. Our platform enforces comprehensive safeguarding regulations:<br><br>' +
-                          '<strong>1. Strict Age Bar:</strong> The platform is designed exclusively for adult audiences (18+). Automated neural age verification models and manual check gates filter and remove underage users during registration streams.<br><br>' +
-                          '<strong>2. Zero-Tolerance Protocol:</strong> Any behavior indicating grooming, sharing explicit content involving minors, or online bullying targeted at youth will result in an immediate permanent device ban. All associated logs will be preserved and forwarded to international cybersecurity law enforcement agencies immediately.<br><br>' +
-                          '<strong>3. Active Reporting Systems:</strong> Users can utilize the 24/7 in-app reporting button to alert our rapid response moderation squad regarding minor safety risks. If you detect any suspicious activities involving minors, immediately notify us at trlivedestek@proton.me.'
+                subtitle: 'TrLive operates under absolute zero-tolerance structural mechanisms regarding any parameters infringing upon the safety of minors:<br><br><strong>1. Age Barrier:</strong> The ecosystem is engineered for mature populations (18+). Neural identification networks instantly reject age-inconsistent user packets.<br><br><strong>2. Reporting Pipelines:</strong> Minor grooming patterns or explicit media distribution trigger permanent device ban. Logs pass to local cybercrime units.<br><br><strong>3. Escalation:</strong> Forward raw evidence nodes directly to trlivedestek@proton.me.',
+                showSlider: false
             },
             about: {
                 title: 'About <span>TrLive</span>',
-                subtitle: 'TrLive is a premium global interactive voice streaming ecosystem engineered to bring human communities together through advanced real-time audio transmission tech.<br><br>' +
-                          'Our mission is to establish a seamless virtual neighborhood where anyone can broadcast their passions, construct personalized voice channels, discover like-minded companions, and engage using interactive virtual gift matrices.<br><br>' +
-                          'Whether you are an e-sports broadcaster searching for a tactical squad, an agency managing creative audio shows, or an independent host conducting local chat circles, TrLive provides the infrastructure to convert voices into vibrant global communities. For business opportunities and corporate communications, you can reach us via trlivedestek@proton.me.'
+                subtitle: 'TrLive is a premier global real-time interactive entertainment ecosystem constructed utilizing cutting-edge audio and video transmission frameworks.<br><br>Our target is enabling hosts and esports broadcasting squads to create customizable visual rooms, interact via premium virtual gifting frameworks, and forge sustainable authentic connections.<br><br>With our latest 1-on-1 video integration modules, users can seamlessly transition beyond standard audio chat circles into face-to-face global engagement tracks. For collaboration parameters, reach us via trlivedestek@proton.me.',
+                showSlider: false
             }
         };
 
-        // İçerik Güncelleme ve Otomatik Yukarı Kaydırma Fonksiyonu
         function updateContent(key) {
             if (contents[key]) {
                 pageTitle.innerHTML = contents[key].title;
                 pageSubtitle.innerHTML = contents[key].subtitle;
-                pageSubtitle.scrollTop = 0; // Her sayfa değişiminde metni en başa sarar
-                toggleMenu(); // Seçim yapıldıktan sonra menüyü kapatır
+                
+                if (contents[key].showSlider) {
+                    featuresSlider.style.display = window.innerWidth >= 992 ? 'grid' : 'flex';
+                } else {
+                    featuresSlider.style.display = 'none';
+                }
+                toggleMenu();
             }
         }
 
-        // Tıklama Olaylarının Atanması (Gezinti Linkleri)
         document.getElementById('homeLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('home'); });
         document.getElementById('termsLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('terms'); });
         document.getElementById('privacyLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('privacy'); });
         document.getElementById('childSafetyLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('childSafety'); });
         document.getElementById('aboutLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('about'); });
-              
-
     </script>
 </body>
 </html>
