@@ -6,39 +6,267 @@
     <title>TrLive - Voice & Video Chat Rooms</title>
     <style>
         :root {
-            --primary-color: #FFD200;
-            --dark-bg: #0A0A0A;
-            --card-bg: #141414;
+            --primary-color: #FFD200; /* YoHo Premium Yellow */
+            --dark-bg: #0A0A0A;      /* Deep Black */
+            --card-bg: #141414;      /* Obsidian Black */
             --text-color: #FFFFFF;
             --text-muted: #AAAAAA;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; -webkit-tap-highlight-color: transparent; }
-        body { background-color: var(--dark-bg); color: var(--text-color); overflow-x: hidden; }
-        header { position: fixed; top: 0; left: 0; width: 100%; height: 70px; background: rgba(10, 10, 10, 0.85); backdrop-filter: blur(10px); display: flex; align-items: center; justify-content: space-between; padding: 0 5%; z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
-        .menu-trigger { cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; width: 26px; height: 18px; z-index: 1002; }
-        .menu-trigger span { display: block; height: 3px; width: 100%; background-color: var(--text-color); border-radius: 3px; transition: all 0.3s ease; }
-        .logo { font-size: 24px; font-weight: 800; color: var(--primary-color); letter-spacing: 1px; }
-        .cta-header-btn { background: var(--primary-color); color: var(--dark-bg); padding: 8px 20px; border-radius: 20px; text-decoration: none; font-weight: 700; font-size: 14px; }
-        .nav-overlay { position: fixed; top: 0; left: -100%; width: 300px; height: 100vh; background-color: var(--card-bg); z-index: 1001; transition: left 0.4s ease; padding: 90px 30px 30px 30px; display: flex; flex-direction: column; justify-content: space-between; }
-        .nav-overlay.active { left: 0; }
-        .nav-menu-links a { display: block; color: var(--text-color); text-decoration: none; font-size: 16px; font-weight: 600; padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.03); }
-        .nav-menu-links a:hover { color: var(--primary-color); }
-        .nav-footer { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
-        .nav-footer a { color: var(--primary-color); text-decoration: none; }
-        .main-wrapper { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 120px 8% 60px 8%; max-width: 1200px; margin: 0 auto; }
-        .hero-text-side { width: 100%; text-align: center; margin-bottom: 50px; }
-        .hero-title { font-size: 3rem; font-weight: 800; margin-bottom: 20px; line-height: 1.2; }
-        .hero-title span { color: var(--primary-color); }
-        .hero-subtitle { font-size: 1.15rem; color: var(--text-muted); line-height: 1.8; max-width: 800px; margin: 0 auto; text-align: left; background: rgba(255, 255, 255, 0.02); padding: 25px; border-radius: 12px; border-left: 4px solid var(--primary-color); }
-        .slider-container { width: 100%; overflow-x: auto; display: flex; gap: 20px; padding-bottom: 30px; }
-        .slide-card { flex: 0 0 300px; background: var(--card-bg); border-radius: 16px; padding: 24px; border: 1px solid rgba(255, 255, 255, 0.03); }
-        .card-icon { font-size: 2rem; margin-bottom: 15px; display: inline-block; }
-        .card-tag { background: rgba(255, 208, 0, 0.1); color: var(--primary-color); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; text-transform: uppercase; display: inline-block; margin-bottom: 15px; }
-        .card-title { font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
-        .card-desc { font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
-        .menu-backdrop { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); z-index: 999; opacity: 0; pointer-events: none; transition: opacity 0.3s; }
-        .menu-backdrop.active { opacity: 1; pointer-events: auto; }
-        @media (min-width: 992px) { .slider-container { display: grid; grid-template-columns: repeat(3, 1fr); } .slide-card { flex: none; } }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .menu-trigger {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 26px;
+            height: 18px;
+            z-index: 1002;
+        }
+
+        .menu-trigger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--text-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+
+        .cta-header-btn {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--card-bg);
+            z-index: 1001;
+            transition: left 0.4s ease;
+            padding: 90px 30px 30px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .nav-overlay.active {
+            left: 0;
+        }
+
+        .nav-menu-links a {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-menu-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-footer {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .nav-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .main-wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 8% 60px 8%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-text-side {
+            width: 100%;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            color: var(--primary-color);
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .slider-container {
+            width: 100%;
+            overflow-x: auto;
+            display: flex;
+            gap: 20px;
+            padding-bottom: 30px;
+        }
+
+        .slide-card {
+            flex: 0 0 300px;
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .card-tag {
+            background: rgba(255, 208, 0, 0.1);
+            color: var(--primary-color);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .policy-section {
+            padding: 80px 8%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .policy-section h2 {
+            color: var(--primary-color);
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .policy-section h3 {
+            color: var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-size: 1.3rem;
+        }
+
+        .policy-section p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        .menu-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        .menu-backdrop.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        @media (min-width: 992px) {
+            .slider-container {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .slide-card {
+                flex: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -53,11 +281,11 @@
 
     <nav class="nav-overlay" id="navOverlay">
         <div class="nav-menu-links">
-            <a href="index.html">Home</a>
-            <a href="terms.html">Terms of Service</a>
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="child-safety.html">Child Safety Policy</a>
-            <a href="about.html">About TrLive</a>
+            <a href="#home" onclick="toggleMenu()">Home</a>
+            <a href="#terms" onclick="toggleMenu()">Terms of Service</a>
+            <a href="#privacy" onclick="toggleMenu()">Privacy Policy</a>
+            <a href="#child-safety" onclick="toggleMenu()">Child Safety Policy</a>
+            <a href="#about" onclick="toggleMenu()">About TrLive</a>
         </div>
         <div class="nav-footer">
             <p>Support & Corporate:</p>
@@ -66,7 +294,7 @@
         </div>
     </nav>
 
-    <main class="main-wrapper">
+    <main class="main-wrapper" id="home">
         <section class="hero-text-side">
             <h1 class="hero-title">Meet New Friends. <br><span>Voice & Video Chat.</span></h1>
             <p class="hero-subtitle">TrLive is a next-generation real-time interactive entertainment ecosystem where you can gather with people worldwide in secure, crystal-clear social spaces.</p>
@@ -93,34 +321,9 @@
             </div>
         </section>
     </main>
-
-    <script>
-        function toggleMenu() {
-            document.getElementById('navOverlay').classList.toggle('active');
-            document.getElementById('menuBackdrop').classList.toggle('active');
-        }
-    </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Terms of Service - TrLive</title>
-    <style>
-        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Segoe UI', sans-serif; padding: 40px 5%; line-height: 1.8; }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { color: #FFD200; font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; }
-        h3 { color: #FFD200; margin-top: 25px; margin-bottom: 10px; }
-        p { color: #AAAAAA; margin-bottom: 20px; text-align: justify; }
-        .back-btn { display: inline-block; margin-bottom: 30px; color: #FFD200; text-decoration: none; font-weight: bold; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-btn">← Back to Home</a>
-        <h1>TrLive Terms of Service</h1>
+    <!-- TERMS OF SERVICE SECTION -->
+    <section class="policy-section" id="terms">
+        <h2>Terms of Service</h2>
         <p>Welcome to TrLive. By accessing or using our Service, you agree to be bound by these Terms of Service. Please read them carefully before using our platform. If you do not agree to these terms, you may not access or use the Service.</p>
         
         <h3>1. Eligibility & Safety Requirement</h3>
@@ -134,28 +337,11 @@
         
         <h3>4. Monitoring & Enforcement</h3>
         <p>TrLive implements automated screening and active human moderation tools to monitor platform behavior. Reports submitted by users are thoroughly reviewed by our security response squad within 24 hours. We reserve the absolute right to ban any account, freeze internal assets, or block device hardware IDs permanently for serious violations. For disputes, contact trlivedestek@proton.me.</p>
-    </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - TrLive</title>
-    <style>
-        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Segoe UI', sans-serif; padding: 40px 5%; line-height: 1.8; }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { color: #FFD200; font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; }
-        h3 { color: #FFD200; margin-top: 25px; margin-bottom: 10px; }
-        p { color: #AAAAAA; margin-bottom: 20px; text-align: justify; }
-        .back-btn { display: inline-block; margin-bottom: 30px; color: #FFD200; text-decoration: none; font-weight: bold; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-btn">← Back to Home</a>
-        <h1>TrLive Privacy Policy</h1>
+    </section>
+
+    <!-- PRIVACY POLICY SECTION -->
+    <section class="policy-section" id="privacy">
+        <h2>Privacy Policy</h2>
         <p>Your privacy is a fundamental pillar of our development philosophy. This Privacy Policy describes how TrLive manages, encrypts, and secures your digital footprint.</p>
         
         <h3>1. Data Collection Framework</h3>
@@ -166,28 +352,11 @@
         
         <h3>3. Data Third-Party Controls & Sharing</h3>
         <p>We do not sell, rent, or lease user databases to commercial advertising brokers. Information is strictly shared with trusted processing partners (such as Apple App Store and Google Play Store for processing secure digital recharges) or law enforcement networks upon receiving explicit legal warrants. Data removal or modification requests can be processed via trlivedestek@proton.me.</p>
-    </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Child Safety Policy - TrLive</title>
-    <style>
-        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Segoe UI', sans-serif; padding: 40px 5%; line-height: 1.8; }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { color: #FFD200; font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; }
-        h3 { color: #FFD200; margin-top: 25px; margin-bottom: 10px; }
-        p { color: #AAAAAA; margin-bottom: 20px; text-align: justify; }
-        .back-btn { display: inline-block; margin-bottom: 30px; color: #FFD200; text-decoration: none; font-weight: bold; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-btn">← Back to Home</a>
-        <h1>Child Safety Policy</h1>
+    </section>
+
+    <!-- CHILD SAFETY POLICY SECTION -->
+    <section class="policy-section" id="child-safety">
+        <h2>Child Safety Policy</h2>
         <p>TrLive maintains an absolute zero-tolerance mandate regarding any actions or communications that threaten the safety, well-being, or innocence of minors. We strictly implement the following digital safety architecture:</p>
         
         <h3>1. Absolute Age Restrictions</h3>
@@ -198,31 +367,21 @@
         
         <h3>3. Instant Escalation Routes</h3>
         <p>Users are highly encouraged to use the dedicated in-app report mechanism. Emergency minor protection alerts are pushed directly to our priority rapid response unit. Direct email reports can be submitted to trlivedestek@proton.me.</p>
-    </div>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About TrLive</title>
-    <style>
-        body { background-color: #0A0A0A; color: #FFFFFF; font-family: 'Segoe UI', sans-serif; padding: 40px 5%; line-height: 1.8; }
-        .container { max-width: 800px; margin: 0 auto; }
-        h1 { color: #FFD200; font-size: 2.5rem; margin-bottom: 30px; font-weight: 800; }
-        p { color: #AAAAAA; margin-bottom: 20px; text-align: justify; }
-        .back-btn { display: inline-block; margin-bottom: 30px; color: #FFD200; text-decoration: none; font-weight: bold; }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <a href="index.html" class="back-btn">← Back to Home</a>
-        <h1>About TrLive</h1>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="policy-section" id="about">
+        <h2>About TrLive</h2>
         <p>TrLive is a premium global real-time interactive entertainment ecosystem constructed utilizing cutting-edge audio and video transmission frameworks.</p>
         <p>Our target is the creation of a borderless social hub enabling casual hosts, independent artists, and esports broadcasting squads to create customizable visual rooms, interact via premium virtual gifting frameworks, and forge sustainable authentic connections.</p>
         <p>With our latest 1-on-1 video integration modules, users can seamlessly transition beyond standard audio chat circles into comprehensive face-to-face global engagement tracks. For dynamic collaboration parameters or developer relationships, reach us via trlivedestek@proton.me.</p>
-    </div>
+    </section>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navOverlay').classList.toggle('active');
+            document.getElementById('menuBackdrop').classList.toggle('active');
+        }
+    </script>
 </body>
 </html>
-
