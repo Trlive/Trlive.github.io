@@ -3,110 +3,438 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TrLive - Yeni Arkadaşlar Bul & Canlı Yayına Katıl</title>
+    <title>TrLive - Sesli Sohbet Odaları & Canlı Yayın</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-        body { background-color: #0d0d0d; color: #ffffff; overflow-x: hidden; }
-        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; position: absolute; width: 100%; z-index: 10; }
-        .logo { font-size: 28px; font-weight: 800; background: linear-gradient(45deg, #ff8800, #ffaa00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; cursor: pointer; }
-        .menu-trigger { color: #aaaaaa; font-size: 15px; cursor: pointer; background: none; border: none; }
-        .hero { display: flex; align-items: center; padding: 150px 8% 80px 8%; min-height: 85vh; background: radial-gradient(circle at 80% 20%, rgba(255,136,0,0.08) 0%, transparent 50%); }
-        .hero-text { max-width: 550px; }
-        .hero-text h1 { font-size: 54px; line-height: 1.1; font-weight: 800; margin-bottom: 20px; }
-        .hero-text p { font-size: 18px; color: #aaaaaa; line-height: 1.6; margin-bottom: 35px; }
-        .download-buttons { display: flex; gap: 15px; }
-        .btn-download { display: flex; align-items: center; gap: 10px; background: #ffaa00; color: #000000; padding: 12px 28px; border-radius: 30px; text-decoration: none; font-weight: 600; }
-        .btn-download.alt { background: rgba(255,255,255,0.08); color: #ffffff; border: 1px solid rgba(255,255,255,0.1); }
-        .warning-banner { background: rgba(255,136,0,0.05); border: 1px solid rgba(255,136,0,0.2); border-radius: 16px; padding: 20px; margin: 40px 8% 0 8%; }
-        .warning-banner p { font-size: 14px; color: #ffaa00; line-height: 1.5; }
-        .features { padding: 80px 8%; text-align: center; }
-        .features h2 { font-size: 36px; margin-bottom: 50px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .feature-card { background: #121212; border: 1px solid rgba(255,255,255,0.03); border-radius: 24px; padding: 40px 30px; text-align: left; }
-        .icon-box { width: 60px; height: 60px; border-radius: 16px; background: linear-gradient(45deg, rgba(255,136,0,0.15), rgba(255,170,0,0.15)); display: flex; align-items: center; justify-content: center; margin-bottom: 25px; font-size: 24px; }
-        footer { background: #050505; padding: 50px 8%; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
-        .footer-left p { color: #666666; font-size: 14px; }
-        .footer-links button { background: none; border: none; color: #666666; margin-left: 20px; font-size: 14px; cursor: pointer; }
-        .yoho-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: #ff8800; z-index: 100; display: none; flex-direction: column; padding: 30px 40px; overflow-y: auto; }
-        .yoho-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; }
-        .yoho-back { background: none; border: none; color: #ffffff; font-size: 32px; cursor: pointer; }
-        .yoho-logo { font-size: 36px; font-weight: 900; color: #ffffff; }
-        .yoho-recharge { border: 1px solid rgba(255,255,255,0.6); background: none; color: #ffffff; padding: 6px 18px; border-radius: 20px; }
-        .yoho-menu-list { display: flex; flex-direction: column; }
-        .yoho-menu-item { color: rgba(255,255,255,0.85); font-size: 22px; padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.15); background: none; border-left: none; border-right: none; text-align: left; cursor: pointer; }
-        .policy-content { display: none; margin-top: 20px; color: #ffffff; background: rgba(0,0,0,0.2); padding: 25px; border-radius: 15px; line-height: 1.6; }
-        .policy-content h3 { margin-bottom: 15px; font-size: 22px; border-bottom: 2px solid rgba(255,255,255,0.2); }
-        @media (max-width: 768px) { .hero { flex-direction: column; text-align: center; padding-top: 120px; } .hero-text h1 { font-size: 38px; } .download-buttons { justify-content: center; flex-direction: column; } }
+        :root {
+            --primary-color: #6C5CE7;
+            --secondary-color: #a29bfe;
+            --dark-bg: #090A0F;
+            --card-bg: #141622;
+            --text-color: #FFFFFF;
+            --text-muted: #8F92A1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 70px;
+            background: rgba(9, 10, 15, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .menu-trigger {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 26px;
+            height: 18px;
+            z-index: 1002;
+        }
+
+        .menu-trigger span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: var(--text-color);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #FF7675, #6C5CE7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        .cta-header-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: transform 0.2s;
+        }
+
+        .nav-overlay {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background-color: var(--card-bg);
+            z-index: 1001;
+            transition: left 0.4s cubic-bezier(0.1, 0.7, 0.1, 1);
+            padding: 90px 30px 30px 30px;
+            box-shadow: 5px 0 25px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .nav-overlay.active {
+            left: 0;
+        }
+
+        .nav-menu-links a {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 500;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: color 0.2s;
+        }
+
+        .nav-menu-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-footer {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .nav-footer a {
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+
+        .hero-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 5% 60px 5%;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            line-height: 1.2;
+        }
+
+        .hero-title span {
+            color: var(--secondary-color);
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .phone-wrapper {
+            position: relative;
+            width: 310px;
+            height: 620px;
+            background: #222538;
+            border: 11px solid #333852;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(108, 92, 231, 0.25);
+            overflow: hidden;
+            margin-bottom: 45px;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 18px;
+            background: #333852;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+            z-index: 10;
+        }
+
+        .app-screen {
+            width: 100%;
+            height: 100%;
+            background: #0F111A;
+            padding: 25px 12px 12px 12px;
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+
+        .app-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-top: 5px;
+        }
+
+        .app-logo {
+            font-weight: bold;
+            font-size: 16px;
+            color: #fff;
+        }
+
+        .app-tabs {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .app-tab {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            padding-bottom: 4px;
+        }
+
+        .app-tab.active {
+            color: #fff;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .room-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .room-card {
+            background: #181B2A;
+            border-radius: 14px;
+            padding: 10px;
+            position: relative;
+            height: 125px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .room-tag {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(108, 92, 231, 0.2);
+            color: var(--secondary-color);
+            font-size: 9px;
+            padding: 2px 6px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .room-avatar-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 15px;
+        }
+
+        .room-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #fdcb6e, #e17055);
+        }
+
+        .room-avatar.blue { background: linear-gradient(45deg, #74b9ff, #0984e3); }
+        .room-avatar.purple { background: linear-gradient(45deg, #a29bfe, #6C5CE7); }
+        .room-avatar.green { background: linear-gradient(45deg, #55efc4, #00b894); }
+
+        .room-user-count { font-size: 9px; color: var(--text-muted); }
+        .room-title { font-size: 11px; font-weight: 600; }
+
+        .gift-pop {
+            background: linear-gradient(90deg, rgba(255,118,117,0.15), rgba(108,92,231,0.15));
+            border: 1px solid rgba(255,118,117,0.3);
+            border-radius: 10px;
+            padding: 6px;
+            margin-top: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .gift-icon { width: 20px; height: 20px; background: #ff7675; border-radius: 4px; }
+        .gift-text { font-size: 9px; line-height: 1.2; }
+
+        .download-buttons { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 280px; }
+        .btn-store {
+            background: #1A1D2E; color: white; padding: 14px; border-radius: 12px;
+            text-decoration: none; display: flex; align-items: center; justify-content: center;
+            gap: 10px; font-weight: 600; font-size: 15px; border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .btn-agency-main { background: linear-gradient(90deg, #6C5CE7, #8180FF); box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3); }
+
+        @media (min-width: 768px) {
+            .hero-container { flex-direction: row; text-align: left; justify-content: space-between; gap: 5%; padding: 120px 8% 60px 8%; }
+            .hero-text-side { flex: 1; max-width: 550px; }
+            .hero-title { font-size: 3.8rem; }
+            .download-buttons { flex-direction: row; max-width: 100%; }
+            .btn-store { flex: 1; }
+        }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="logo" onclick="window.location.reload()">TrLive</div>
-        <div><button class="menu-trigger" onclick="openYohoMenu()">📄 Politikalar & Kurallar</button></div>
+
+    <header>
+        <div class="menu-trigger" id="menuBtn">
+            <span></span><span></span><span></span>
+        </div>
+        <div class="logo">TrLive</div>
+        <a href="mailto:trlivedestek@proton.me" class="cta-header-btn">Bize Yazın</a>
+    </header>
+
+    <nav class="nav-overlay" id="navOverlay">
+        <div class="nav-menu-links">
+            <a href="#" id="homeLink">Ana Sayfa</a>
+            <a href="#" id="aboutLink">Hakkımızda</a>
+            <a href="#" id="agencyLink">Ajans Yönetimi</a>
+            <a href="#" id="rulesLink">Politikalar & Kurallar</a>
+        </div>
+        <div class="nav-footer">
+            <p>Destek ve İletişim:</p>
+            <a href="mailto:trlivedestek@proton.me">trlivedestek@proton.me</a>
+            <p style="margin-top: 15px; font-size: 10px;">© 2026 TrLive Ajans</p>
+        </div>
     </nav>
-    <section class="hero">
-        <div class="hero-text">
-            <h1>Yeni Arkadaşlar Bul. Sesli Sohbetin Tadını Çıkar.</h1>
-            <p>TrLive, dünyadan insanlarla bağlantı kurabileceğiniz, ücretsiz ve güvenli bir sesli grup sohbeti platformudur.</p>
+
+    <section class="hero-container">
+        <div class="hero-text-side">
+            <h1 class="hero-title" id="pageTitle">Yeni Arkadaşlar Bul. <br><span>Sesli Sohbet Et.</span></h1>
+            <p class="hero-subtitle" id="pageSubtitle">TrLive, dünyanın her yerinden insanlarla güvenli, kesintisiz ve eğlenceli odalarda bir araya gelebileceğiniz yeni nesil sesli eğlence ve ajans yönetim platformudur.</p>
+            
             <div class="download-buttons">
-                <a href="#" class="btn-download"><span>🤖 Google Play</span></a>
-                <a href="#" class="btn-download alt"><span>🍏 App Store</span></a>
+                <a href="mailto:trlivedestek@proton.me" class="btn-store btn-agency-main">
+                    <span>✉️</span> Ajans Başvurusu
+                </a>
+            </div>
+        </div>
+
+        <div class="phone-wrapper">
+            <div class="phone-notch"></div>
+            <div class="app-screen">
+                <div class="app-header">
+                    <div class="app-logo">TrLive</div>
+                    <div style="font-size: 12px;">🔍 🔔</div>
+                </div>
+                <div class="app-tabs">
+                    <div class="app-tab active">Popüler</div>
+                    <div class="app-tab">Canlı</div>
+                    <div class="app-tab">Odalar</div>
+                </div>
+                <div class="room-grid">
+                    <div class="room-card">
+                        <span class="room-tag">Sohbet</span>
+                        <div class="room-avatar-group">
+                            <div class="room-avatar"></div>
+                            <span class="room-user-count">🔥 4.2k</span>
+                        </div>
+                        <div class="room-title">Dostluk Mekanı 🎙️</div>
+                    </div>
+                    <div class="room-card">
+                        <span class="room-tag">Müzik</span>
+                        <div class="room-avatar-group">
+                            <div class="room-avatar blue"></div>
+                            <span class="room-user-count">🔥 1.9k</span>
+                        </div>
+                        <div class="room-title">Akustik Canlı</div>
+                    </div>
+                    <div class="room-card">
+                        <span class="room-tag">Oyun</span>
+                        <div class="room-avatar-group">
+                            <div class="room-avatar purple"></div>
+                            <span class="room-user-count">🔥 2.8k</span>
+                        </div>
+                        <div class="room-title">E-Sport Odası</div>
+                    </div>
+                    <div class="room-card">
+                        <span class="room-tag">Ajans</span>
+                        <div class="room-avatar-group">
+                            <div class="room-avatar green"></div>
+                            <span class="room-user-count">🔥 5.1k</span>
+                        </div>
+                        <div class="room-title">Resmi Yayın Odası</div>
+                    </div>
+                </div>
+
+                <div class="gift-pop">
+                    <div class="gift-icon"></div>
+                    <div class="gift-text">
+                        <strong style="color: #fdcb6e;">Kullanıcı_77</strong><br>Kutup Yıldızı gönderdi!
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-    <div class="warning-banner">
-        <p><strong>7/24 Canlı İzleme Bildirimi:</strong> TrLive platformundaki tüm odalar, topluluk güvenliği için yapay zeka ve moderatörler tarafından izlenmektedir.</p>
-    </div>
-    <section class="features">
-        <h2>Neden TrLive?</h2>
-        <div class="feature-grid">
-            <div class="feature-card"><div class="icon-box">👥</div><h3>Yeni Arkadaşlar Edin</h3><p>İlgi alanlarınıza uygun odaları bulun ve sohbete başlayın.</p></div>
-            <div class="feature-card"><div class="icon-box">🎙️</div><h3>Sesli Canlı Yayın</h3><p>Kendi sesli odanızı açın veya popüler yayınlara katılın.</p></div>
-            <div class="feature-card"><div class="icon-box">🎁</div><h3>Sanal Hediyeler</h3><p>Yayıncılara eğlenceli hediyeler göndererek etkileşimi artırın.</p></div>
-        </div>
-    </section>
-    <div class="yoho-overlay" id="yohoMenu">
-        <div class="yoho-header">
-            <button class="yoho-back" onclick="closeYohoMenu()">✕</button>
-            <div class="yoho-logo">TrLive</div>
-            <button class="yoho-recharge">Yükle</button>
-        </div>
-        <div class="yoho-menu-list" id="menuList">
-            <button class="yoho-menu-item" onclick="showPolicy('terms')">Terms (Kullanım Şartları)</button>
-            <button class="yoho-menu-item" onclick="showPolicy('privacy')">Privacy (Gizlilik Politikası)</button>
-            <button class="yoho-menu-item" onclick="showPolicy('child')">Child Safety Policy (Çocuk Güvenliği)</button>
-            <button class="yoho-menu-item" onclick="showPolicy('about')">About TrLive (Hakkımızda)</button>
-        </div>
-        <div id="terms-content" class="policy-content">
-            <h3>Terms (Kullanım Şartları)</h3>
-            <p>TrLive platformuna kayıt olan tüm kullanıcılar 18 yaşından büyük olduğunu kabul eder. Kuralların ihlali hesapların kalıcı olarak askıya alınmasına sebep olur.</p>
-        </div>
-        <div id="privacy-content" class="policy-content">
-            <h3>Privacy (Gizlilik Politikası)</h3>
-            <p>TrLive, profil bilgilerinizi ve hesap verilerinizi korur. Verileriniz üçüncü taraf şirketlerle asla paylaşılmaz. İstediğiniz an hesabınızı silebilirsiniz.</p>
-        </div>
-        <div id="child-content" class="policy-content">
-            <h3>Child Safety Policy (Çocuk Güvenliği)</h3>
-            <p>Platformumuz reşit olmayan bireylerin korunması konusunda sıfır tolerans politikası uygular. İhlal durumunda yasal mercilere suç duyurusunda bulunulur.</p>
-        </div>
-        <div id="about-content" class="policy-content">
-            <h3>About TrLive (Hakkımızda)</h3>
-            <p>TrLive, yeni nesil sesli eğlence platformudur. Amacımız kullanıcıların güvenli ve kaliteli bir ortamda iletişim kurmasını sağlamaktır.</p>
-        </div>
-    </div>
-    <footer>
-        <div class="footer-left"><p>&copy; 2026 TrLive. Tüm Hakları Saklıdır.</p></div>
-        <div class="footer-links">
-            <button onclick="openYohoMenu(); showPolicy('terms');">Kullanım Şartları</button>
-            <button onclick="openYohoMenu(); showPolicy('privacy');">Gizlilik Politikası</button>
-            <button onclick="openYohoMenu(); showPolicy('child');">Çocuk Güvenliği</button>
-        </div>
-    </footer>
     <script>
-        function openYohoMenu() { document.getElementById('yohoMenu').style.display = 'flex'; hideAllPolicies(); document.getElementById('menuList').style.display = 'flex'; }
-        function closeYohoMenu() { document.getElementById('yohoMenu').style.display = 'none'; }
-        function showPolicy(type) { document.getElementById('menuList').style.display = 'none'; hideAllPolicies(); document.getElementById(type + '-content').style.display = 'block'; }
-        function hideAllPolicies() { const contents = document.querySelectorAll('.policy-content'); contents.forEach(content => content.style.display = 'none'); }
+        const menuBtn = document.getElementById('menuBtn');
+        const navOverlay = document.getElementById('navOverlay');
+
+        function toggleMenu() {
+            navOverlay.classList.toggle('active');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        const pageTitle = document.getElementById('pageTitle');
+        const pageSubtitle = document.getElementById('pageSubtitle');
+
+        document.getElementById('homeLink').addEventListener('click', (e) => {
+            e.preventDefault(); toggleMenu();
+            pageTitle.innerHTML = "Yeni Arkadaşlar Bul. <br><span>Sesli Sohbet Et.</span>";
+            pageSubtitle.innerText = "TrLive, dünyanın her yerinden insanlarla güvenli, kesintisiz ve eğlenceli odalarda bir araya gelebileceğiniz yeni nesil sesli eğlence platformudur.";
+        });
+
+        document.getElementById('aboutLink').addEventListener('click', (e) => {
+            e.preventDefault(); toggleMenu();
+            pageTitle.innerHTML = "Biz Kimiz?<br><span>Hakkımızda</span>";
+            pageSubtitle.innerText = "TrLive, 2026 yılında kurulan küresel topluluk standartlarına uyumlu yeni nesil sesli etkileşim sistemidir. Amacımız, yayıncıları ve kullanıcıları adil bir ortamda buluşturmaktır.";
+        });
+
+        document.getElementById('agencyLink').addEventListener('click', (e) => {
+            e.preventDefault(); toggleMenu();
+            pageTitle.innerHTML = "Yayıncı Olun.<br><span>Ajans Yönetimi</span>";
+            pageSubtitle.innerText = "TrLive bünyesinde kendi sesli topluluğunuzu kurarak yüksek gelir modellerine dahil olabilirsiniz. Resmi yayıncılık başvurusu ve ajans desteği için mail yoluyla iletişime geçebilirsiniz.";
+        });
+
+        document.getElementById('rulesLink').addEventListener('click', (e) => {
+            e.preventDefault(); toggleMenu();
+            pageTitle.innerHTML = "Güvenli Ortam.<br><span>Politikalarımız</span>";
+            pageSubtitle.innerText = "TrLive platformu 7/24 uzman moderatör ekibi tarafından izlenmektedir. Topluluk kurallarına aykırı davranış sergileyen hesaplar kalıcı olarak uzaklaştırılır.";
+        });
     </script>
 </body>
 </html>
