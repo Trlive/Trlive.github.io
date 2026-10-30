@@ -344,8 +344,21 @@
 
         menuBtn.addEventListener('click', toggleMenu);
     </script>
-    <script>
-        const contents = {
+</script> 
+    const termsText = `Welcome to TrLive. By accessing or using our Service, you agree to be bound by these Terms of Service. Please read them carefully before using our platform. If you do not agree to these terms, you may not access or use the Service.<br><br>
+<strong>1. Eligibility & Safety Requirement:</strong> You must be at least 18 years of age to create an account or use TrLive. By registering, you warrant that you have the full legal capacity to enter into this agreement. Any use of the platform by anyone under the age of 18 is strictly prohibited and constitutes a direct violation of these Terms.<br><br>
+<strong>2. User Conduct & Content Standards:</strong> TrLive provides a real-time voice and video communication environment. You retain sole responsibility for all audio streams, text messages, pictures, or data you broadcast. You explicitly agree not to post, stream, or transmit any material that is obscene, defamatory, hateful, racially or ethnically offensive, or encouraging criminal conduct. Pornography, sexual harassment, or verbal abuse in public or private chat rooms will result in immediate termination.<br><br>
+<strong>3. Commercial Restrictions:</strong> The Service is intended solely for personal, non-commercial use. Users are prohibited from using the platform for unauthorized advertising, marketing, or collecting user data for profit without written authorization from TrLive Management.<br><br>
+<strong>4. Monitoring & Enforcement:</strong> TrLive implements automated screening and active human moderation tools to monitor platform behavior. Reports submitted by users are thoroughly reviewed by our security response squad within 24 hours. We reserve the absolute right to ban any account, freeze internal assets, or block device hardware IDs permanently for serious violations. For disputes, contact trlivedestek@proton.me.`;
+const privacyText = `Your privacy is a fundamental pillar of our development philosophy. This Privacy Policy describes how TrLive manages, encrypts, and secures your digital footprint:<br><br>
+<strong>1. Data Collection Framework:</strong> When you register, we collect essential account information including your unique user ID, account nickname, profile picture, gender preference, and external social media token logs. We also log hardware-level details, device models, operating system versions, IP addresses, and performance metrics to prevent fraud and maintain stability.<br><br>
+<strong>2. Voice and Video Stream Privacy:</strong> TrLive uses peer-to-peer and cloud-relay infrastructure to transmit live audio and video communication packets instantly. Private 1-on-1 video chats and voice interactions are volatile and processed locally; they are never permanently recorded or stored on our central database servers.<br><br>
+<strong>3. Data Third-Party Controls & Sharing:</strong> We do not sell, rent, or lease user databases to commercial advertising brokers. Information is strictly shared with trusted processing partners (such as Apple App Store and Google Play Store for processing secure digital recharges) or law enforcement networks upon receiving explicit legal warrants. Data removal or modification requests can be processed via trlivedestek@proton.me.`;
+const childSafetyText = `TrLive maintains an absolute zero-tolerance mandate regarding any actions or communications that threaten the safety, well-being, or innocence of minors. We strictly implement the following digital safety architecture:<br><br>
+<strong>1. Absolute Age Restrictions:</strong> Our platform is designed and legally restricted to adult communities (18 years and older). We leverage multi-layered neural network face-analysis algorithms and manual gatekeeping to instantly isolate and block accounts suspected of belonging to minors during the onboarding process.<br><br>
+<strong>2. Radical Protection Measures:</strong> Any behavior indicating cyber-grooming, child exploitation, distributing or requesting inappropriate materials involving youth, or verbal harassment targeted toward young individuals will result in an immediate permanent hardware device ban. TrLive saves all relevant network trails, access logs, and registration info to share directly with global cybersecurity centers and local law enforcement authorities.<br><br>
+<strong>3. Instant Escalation Routes:</strong> Users are highly encouraged to use the dedicated in-app report mechanism. Emergency minor protection alerts are pushed directly to our priority rapid response unit. Direct email reports can be submitted to trlivedestek@proton.me.`;
+  const contents = {
             home: {
                 title: 'Meet New Friends. <br><span>Voice & Video Chat.</span>',
                 subtitle: 'TrLive is a next-generation real-time interactive entertainment ecosystem where you can gather with people worldwide in secure, crystal-clear social spaces.',
@@ -391,7 +404,8 @@
         document.getElementById('termsLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('terms'); });
         document.getElementById('privacyLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('privacy'); });
         document.getElementById('childSafetyLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('childSafety'); });
-        document.getElementById('aboutLink').addEventListener('click', (e) => { e.preventDefault(); updateContent('about'); });
+        document.getElementById('aboutLink').
+    
     </script>
 </body>
 </html>
