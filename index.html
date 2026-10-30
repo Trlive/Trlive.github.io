@@ -4,230 +4,188 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#090909">
-<meta name="description" content="TR Live ile sesli ve görüntülü sohbet odalarında tanış, sohbet et ve yeni arkadaşlıklar kur.">
-<title>TR Live | Birlikte Daha Yakın</title>
-<link rel="stylesheet" href="assets/css/style.css">
+<meta name="description" content="TR Live — Sesli odalar, görüntülü sohbet ve sosyal bağlantılar.">
+<title>TR Live | Connect. Share. Live.</title>
+<link rel="stylesheet" href="varliklar/css/style.css">
 </head>
 <body>
 
 <header class="header">
-  <a class="logo" href="index.html"><span>T</span> TR LIVE</a>
+  <a class="brand" href="index.html">
+    <span class="brand-mark">TR</span>
+    <span>TR <b>LIVE</b></span>
+  </a>
 
-  <nav id="navigation">
-    <a href="#features" data-tr="Özellikler" data-en="Features">Özellikler</a>
-    <a href="#screens" data-tr="Uygulamayı Keşfet" data-en="Explore">Uygulamayı Keşfet</a>
-    <a href="contact.html" data-tr="İletişim" data-en="Contact">İletişim</a>
+  <button class="menu-toggle" aria-label="Menüyü aç">☰</button>
+
+  <nav class="nav">
+    <a href="#features">Özellikler</a>
+    <a href="#screens">Uygulamayı keşfet</a>
+    <a href="#about">Hakkımızda</a>
+    <a href="contact.html">İletişim</a>
+    <button class="lang-toggle" type="button">EN</button>
   </nav>
-
-  <select id="languageSelect" aria-label="Language">
-    <option value="tr">Türkçe</option>
-    <option value="en">English</option>
-  </select>
-
-  <button id="menuToggle" class="menu-toggle" aria-label="Menü">☰</button>
 </header>
 
 <main>
 
 <section class="hero">
-  <div class="hero-content">
-    <span class="eyebrow">WELCOME TO TR LIVE</span>
-
-    <h1 data-tr="Sohbetin yeni adresine <span>hoş geldin.</span>"
-        data-en="Your new place to <span>connect.</span>">
-      Sohbetin yeni adresine <span>hoş geldin.</span>
-    </h1>
-
-    <p data-tr="Sesli ve görüntülü sohbet odalarında insanlarla tanış, yeni arkadaşlıklar kur ve TR Live topluluğunun bir parçası ol."
-       data-en="Meet people, make new friends and become part of the TR Live community through live audio and video chat rooms.">
-      Sesli ve görüntülü sohbet odalarında insanlarla tanış,
-      yeni arkadaşlıklar kur ve TR Live topluluğunun bir parçası ol.
+  <div class="hero-copy">
+    <p class="eyebrow">YOUR MOMENT. YOUR COMMUNITY.</p>
+    <h1>Bağlan. Paylaş.<br><span>Canlı kal.</span></h1>
+    <p>
+      Sesli odalarda sohbet et, görüntülü odalarda yeni insanlarla
+      tanış ve anlarını toplulukla paylaş.
     </p>
-
-    <a href="#screens" class="gold-button"
-       data-tr="Uygulamayı keşfet"
-       data-en="Explore the app">Uygulamayı keşfet</a>
+    <a class="gold-button" href="#screens">TR Live'ı keşfet</a>
   </div>
 
-  <div class="showcase" id="screens">
-    <div class="phone-stage">
+  <div class="hero-art">
+    <div class="glow"></div>
 
-      <!-- ANASAYFA -->
-      <article class="phone active" data-phone="0">
-        <div class="phone-screen">
-          <div class="status">9:41　● ● ●</div>
-          <div class="app-header">TR LIVE <span>♡　♧</span></div>
-          <div class="welcome">
-            <small>HOŞ GELDİN</small>
-            <h3>Merhaba!</h3>
-            <p>Bugün kimi tanımak istersin?</p>
-          </div>
-          <h4>Öne Çıkan Odalar</h4>
-          <div class="room-card">
-            <div class="room-picture gold-bg">🎙️</div>
-            <div><b>Arkadaşlarla Sohbet</b><small>Canlı sesli oda</small></div>
-          </div>
-          <div class="room-card">
-            <div class="room-picture purple-bg">🌟</div>
-            <div><b>Yeni İnsanlar</b><small>Herkese açık oda</small></div>
-          </div>
-          <h4>Senin İçin</h4>
-          <div class="quick-grid">
-            <div>🎧<small>Sesli Sohbet</small></div>
-            <div>📹<small>Görüntülü</small></div>
-          </div>
-          <div class="phone-nav">⌂　♡　◉　✉　●</div>
-        </div>
-      </article>
-
-      <!-- SESLİ ODA -->
-      <article class="phone" data-phone="1">
-        <div class="phone-screen">
-          <div class="status">9:41　● ● ●</div>
-          <div class="app-header">‹　 SESLİ ODA　•••</div>
-          <div class="room-heading">
-            <small>TR LIVE TOPLULUĞU</small>
-            <h3>Arkadaşlık Zamanı</h3>
-            <p>24 kişi odada</p>
-          </div>
-          <div class="mic-grid">
-            <div><span class="avatar a1">A</span><small>Akın</small></div>
-            <div><span class="avatar a2">M</span><small>Melis</small></div>
-            <div><span class="avatar a3">E</span><small>Emre</small></div>
-            <div><span class="avatar a4">S</span><small>Sena</small></div>
-            <div><span class="avatar a5">D</span><small>Deniz</small></div>
-            <div><span class="avatar a6">K</span><small>Kaan</small></div>
-          </div>
-          <div class="chat-preview"><b>Melis:</b> Herkese merhaba!</div>
-          <div class="room-controls">🎤　🎁　💬　＋</div>
-        </div>
-      </article>
-
-      <!-- GÖRÜNTÜLÜ ODA -->
-      <article class="phone" data-phone="2">
-        <div class="phone-screen video-screen">
-          <div class="status">9:41　● ● ●</div>
-          <div class="video-heading">
-            <small>TR LIVE</small>
-            <h3>Görüntülü Sohbet</h3>
-            <p>Canlı oda · 4 katılımcı</p>
-          </div>
-          <div class="video-grid">
-            <div class="video-tile v1"><span>Melis</span></div>
-            <div class="video-tile v2"><span>Emre</span></div>
-            <div class="video-tile v3"><span>Sena</span></div>
-            <div class="video-tile v4"><span>Deniz</span></div>
-          </div>
-          <div class="video-controls">🎤　📷　🔄　☎</div>
-        </div>
-      </article>
-
-      <!-- KULLANICI PROFİLİ -->
-      <article class="phone" data-phone="3">
-        <div class="phone-screen">
-          <div class="status">9:41　● ● ●</div>
-          <div class="app-header">TR LIVE <span>⚙</span></div>
-          <div class="profile">
-            <div class="profile-avatar">M</div>
-            <h3>Melis</h3>
-            <p>TR Live kullanıcısı</p>
-            <div class="profile-stats">
-              <div><b>128</b><small>Takipçi</small></div>
-              <div><b>86</b><small>Takip</small></div>
-              <div><b>24</b><small>Anlar</small></div>
-            </div>
-            <button class="profile-button">Profili Görüntüle</button>
-          </div>
-          <div class="profile-menu">
-            <div>👤　Profil bilgileri</div>
-            <div>🎁　Hediyeler</div>
-            <div>🖼️　Anlar</div>
-            <div>⚙　Ayarlar</div>
-          </div>
-          <div class="phone-nav">⌂　♡　◉　✉　●</div>
-        </div>
-      </article>
-
+    <div class="hero-phone rear">
+      <div class="hero-screen rear-screen">
+        <div class="mini-brand">TR <b>LIVE</b></div>
+        <div class="mini-circle"></div>
+        <div class="mini-lines"></div>
+      </div>
     </div>
 
-    <div class="screen-indicators">
-      <button class="screen-dot active" data-screen="0" aria-label="Anasayfa"></button>
-      <button class="screen-dot" data-screen="1" aria-label="Sesli oda"></button>
-      <button class="screen-dot" data-screen="2" aria-label="Görüntülü oda"></button>
-      <button class="screen-dot" data-screen="3" aria-label="Profil"></button>
+    <div class="hero-phone front">
+      <div class="hero-screen">
+        <div class="status">9:41 <span>● ● ●</span></div>
+        <div class="mini-brand">TR <b>LIVE</b></div>
+        <div class="hero-message">
+          DISCOVER YOUR<br>
+          <strong>LIVE WORLD</strong>
+        </div>
+        <div class="avatar-row">
+          <i></i><i></i><i></i><i></i>
+        </div>
+        <div class="hero-room"></div>
+        <div class="mock-nav">
+          <span>⌂</span><span>◉</span><span>▣</span><span>✉</span><span>♙</span>
+        </div>
+      </div>
     </div>
 
-    <p id="screenLabel" class="screen-label">Anasayfa</p>
+    <div class="live-chip">LIVE <b>●</b></div>
   </div>
 </section>
 
-<section class="features" id="features">
-  <div class="section-title">
-    <span class="eyebrow">TR LIVE EXPERIENCE</span>
-    <h2 data-tr="Bir araya gelmenin yeni yolu"
-        data-en="A new way to connect">Bir araya gelmenin yeni yolu</h2>
-    <p data-tr="Sohbet et, paylaş ve yeni insanlarla tanış."
-       data-en="Chat, share and meet new people.">
-      Sohbet et, paylaş ve yeni insanlarla tanış.
-    </p>
-  </div>
+<section id="features" class="section">
+  <p class="eyebrow">ONE APP, MANY MOMENTS</p>
+  <h2>Sosyal dünyanınla tanış</h2>
 
   <div class="feature-grid">
-    <article class="feature-card">
-      <div class="feature-icon">🎙️</div>
-      <h3>Sesli Odalar</h3>
-      <p>Canlı sesli sohbetlere katıl ve yeni topluluklarla tanış.</p>
+    <article>
+      <span class="feature-icon">◉</span>
+      <h3>Sesli odalar</h3>
+      <p>Farklı konulardaki sohbetlere katıl, dinle ve sesini paylaş.</p>
     </article>
 
-    <article class="feature-card">
-      <div class="feature-icon">📹</div>
-      <h3>Görüntülü Odalar</h3>
-      <p>Görüntülü sohbet ile iletişimini daha yakın hale getir.</p>
+    <article>
+      <span class="feature-icon">▣</span>
+      <h3>Görüntülü odalar</h3>
+      <p>Canlı görüntülü sohbetlerle topluluğa daha yakından bağlan.</p>
     </article>
 
-    <article class="feature-card">
-      <div class="feature-icon">💬</div>
-      <h3>Mesajlaşma</h3>
-      <p>Arkadaşlarınla mesajlaş ve iletişimde kal.</p>
+    <article>
+      <span class="feature-icon">✦</span>
+      <h3>Anlar</h3>
+      <p>Fotoğraf ve kısa paylaşımlarla gününden kesitler paylaş.</p>
+    </article>
+
+    <article>
+      <span class="feature-icon">♙</span>
+      <h3>Kullanıcı profili</h3>
+      <p>Profilini düzenle ve sosyal çevrenle bağlantıda kal.</p>
     </article>
   </div>
 </section>
 
-<section class="about" id="about">
-  <span class="eyebrow">ABOUT TR LIVE</span>
-  <h2>TR Live ile bağlantıda kal.</h2>
-  <p>TR Live, kullanıcıların sesli ve görüntülü sohbet odalarında
-  iletişim kurabilmesi için tasarlanan sosyal bir platformdur.</p>
+<section id="screens" class="section screens-section">
+  <div class="section-heading">
+    <p class="eyebrow">TAKE A CLOSER LOOK</p>
+    <h2>TR Live cebinde</h2>
+    <p>Uygulamanın farklı alanlarını keşfet.</p>
+  </div>
+
+  <div class="showcase">
+    <button class="slide-arrow prev" aria-label="Önceki ekran">‹</button>
+
+    <div class="device">
+      <div class="device-screen">
+        <div class="status">9:41 <span>● ● ●</span></div>
+
+        <div class="screen-content" id="screenContent">
+          <div class="screen-brand">TR <b>LIVE</b></div>
+          <p class="screen-kicker">DISCOVER</p>
+          <h3>Find your<br>live community</h3>
+
+          <div class="screen-card">
+            <div class="screen-people"><i></i><i></i><i></i></div>
+            <b>Popular rooms</b>
+            <small>Join the conversation</small>
+          </div>
+
+          <div class="screen-lines"><i></i><i></i><i></i></div>
+        </div>
+
+        <div class="screen-bottom">
+          <span>⌂</span><span>◉</span><span>▣</span><span>✉</span><span>♙</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="slide-arrow next" aria-label="Sonraki ekran">›</button>
+  </div>
+
+  <div class="slide-caption">
+    <span id="slideName">Anasayfa</span>
+    <div class="dots">
+      <button class="dot active" aria-label="Anasayfa"></button>
+      <button class="dot" aria-label="Sesli oda"></button>
+      <button class="dot" aria-label="Görüntülü oda"></button>
+      <button class="dot" aria-label="Kullanıcı profili"></button>
+    </div>
+  </div>
 </section>
 
-<section class="download">
-  <span class="eyebrow">JOIN THE COMMUNITY</span>
-  <h2>Sohbet şimdi başlıyor.</h2>
-  <p>TR Live topluluğuna katıl.</p>
-  <span class="coming-soon">ÇOK YAKINDA</span>
+<section id="about" class="section about">
+  <p class="eyebrow">ABOUT TR LIVE</p>
+  <h2>Birlikte daha canlı</h2>
+  <p>
+    TR Live, insanların sesli ve görüntülü sohbetler aracılığıyla
+    bir araya gelmesini sağlayan sosyal bir platformdur.
+    Saygılı, güvenli ve keyifli bir topluluk deneyimi oluşturmayı hedefleriz.
+  </p>
+</section>
+
+<section class="cta">
+  <h2>Sohbete katılmaya hazır mısın?</h2>
+  <p>TR Live dünyasını keşfet.</p>
+  <a class="gold-button" href="contact.html">Bize ulaş</a>
 </section>
 
 </main>
 
 <footer class="footer">
-  <div class="footer-brand">TR <strong>LIVE</strong></div>
+  <a class="brand" href="index.html">
+    <span class="brand-mark">TR</span>
+    <span>TR <b>LIVE</b></span>
+  </a>
 
   <div class="footer-links">
     <a href="privacy.html">Gizlilik Politikası</a>
     <a href="terms.html">Kullanım Koşulları</a>
-    <a href="refund.html">İade ve Ödeme Politikası</a>
-    <a href="account-deletion.html">Hesap Silme</a>
     <a href="child-safety.html">Çocuk Güvenliği</a>
-    <a href="community.html">Topluluk Kuralları</a>
-    <a href="cookies.html">Çerez Politikası</a>
-    <a href="contact.html">İletişim ve Şirket Bilgileri</a>
+    <a href="contact.html">İletişim</a>
   </div>
 
-  <p>© <span id="currentYear"></span> Trlive Digital LLC. All rights reserved.</p>
-  <p>Destek: <a href="mailto:trlivedestek@proton.me">trlivedestek@proton.me</a></p>
+  <small>© 2026 Trlive Digital LLC. All rights reserved.</small>
 </footer>
 
-<script src="assets/js/main.js"></script>
+<script src="varliklar/js/main.js"></script>
 </body>
 </html>
