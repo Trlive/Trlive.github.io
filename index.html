@@ -13,7 +13,7 @@
         }
 
         body {
-            background-color: #0b0914;
+            background-color: #0d0d0d;
             color: #ffffff;
             overflow-x: hidden;
         }
@@ -32,14 +32,14 @@
         .logo {
             font-size: 28px;
             font-weight: 800;
-            background: linear-gradient(45deg, #ff2a5f, #ff7e40);
+            background: linear-gradient(45deg, #ffcc00, #ff9900);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             letter-spacing: 1px;
         }
 
         .nav-links a {
-            color: #a0a0b0;
+            color: #aaaaaa;
             text-decoration: none;
             margin-left: 30px;
             font-size: 15px;
@@ -47,7 +47,7 @@
         }
 
         .nav-links a:hover {
-            color: #ffffff;
+            color: #ffcc00;
         }
 
         /* Hero Section */
@@ -56,8 +56,8 @@
             align-items: center;
             justify-content: space-between;
             padding: 150px 8% 80px 8%;
-            min-height: 90vh;
-            background: radial-gradient(circle at 80% 20%, rgba(255, 42, 95, 0.15) 0%, transparent 50%);
+            min-height: 85vh;
+            background: radial-gradient(circle at 80% 20%, rgba(255, 204, 0, 0.08) 0%, transparent 50%);
         }
 
         .hero-text {
@@ -69,14 +69,14 @@
             line-height: 1.1;
             font-weight: 800;
             margin-bottom: 20px;
-            background: linear-gradient(to right, #ffffff, #dcdcdf);
+            background: linear-gradient(to right, #ffffff, #e0e0e0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero-text p {
             font-size: 18px;
-            color: #a0a0b0;
+            color: #aaaaaa;
             line-height: 1.6;
             margin-bottom: 35px;
         }
@@ -90,31 +90,52 @@
             display: flex;
             align-items: center;
             gap: 10px;
-            background: #ffffff;
-            color: #0b0914;
+            background: #ffcc00;
+            color: #000000;
             padding: 12px 28px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 600;
             font-size: 15px;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255,255,255,0.1);
         }
 
         .btn-download.alt {
             background: rgba(255, 255, 255, 0.08);
             color: #ffffff;
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .btn-download:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 42, 95, 0.3);
+            box-shadow: 0 6px 20px rgba(255, 204, 0, 0.3);
+        }
+
+        /* Warning Banner */
+        .warning-banner {
+            background: rgba(255, 204, 0, 0.05);
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 40px 8% 0 8%;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .warning-banner span {
+            font-size: 24px;
+        }
+
+        .warning-banner p {
+            font-size: 14px;
+            color: #ffcc00;
+            line-height: 1.5;
         }
 
         /* Features Section */
         .features {
-            padding: 100px 8%;
+            padding: 80px 8%;
             text-align: center;
         }
 
@@ -131,7 +152,7 @@
         }
 
         .feature-card {
-            background: linear-gradient(145deg, #161324, #120f1d);
+            background: #121212;
             border: 1px solid rgba(255, 255, 255, 0.03);
             border-radius: 24px;
             padding: 40px 30px;
@@ -141,15 +162,14 @@
 
         .feature-card:hover {
             transform: translateY(-5px);
-            border-color: rgba(255, 42, 95, 0.2);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+            border-color: rgba(255, 204, 0, 0.3);
         }
 
         .icon-box {
             width: 60px;
             height: 60px;
             border-radius: 16px;
-            background: linear-gradient(45deg, rgba(255, 42, 95, 0.2), rgba(255, 126, 64, 0.2));
+            background: linear-gradient(45deg, rgba(255, 204, 0, 0.15), rgba(255, 153, 0, 0.15));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -157,21 +177,56 @@
             font-size: 24px;
         }
 
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
-            color: #ffffff;
+        /* Community Guidelines Rules Section */
+        .rules-section {
+            padding: 60px 8%;
+            background-color: #050505;
         }
 
-        .feature-card p {
-            color: #8a8a9e;
+        .rules-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: #121212;
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .rules-container h2 {
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .rules-list {
+            list-style: none;
+        }
+
+        .rules-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
             font-size: 15px;
+            color: #cccccc;
             line-height: 1.6;
+        }
+
+        .rules-list li:last-child {
+            border-bottom: none;
+        }
+
+        .rules-list strong {
+            color: #ffcc00;
+            white-space: nowrap;
         }
 
         /* Footer */
         footer {
-            background: #06050b;
+            background: #050505;
             padding: 50px 8%;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             display: flex;
@@ -182,12 +237,12 @@
         }
 
         .footer-left p {
-            color: #606070;
+            color: #666666;
             font-size: 14px;
         }
 
         .footer-links a {
-            color: #606070;
+            color: #666666;
             text-decoration: none;
             margin-left: 20px;
             font-size: 14px;
@@ -195,77 +250,60 @@
         }
 
         .footer-links a:hover {
-            color: #ff2a5f;
+            color: #ffcc00;
         }
 
-        /* Mobil Uyum */
         @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                text-align: center;
-                padding-top: 120px;
-            }
-            .hero-text h1 {
-                font-size: 38px;
-            }
-            .download-buttons {
-                justify-content: center;
-                flex-direction: column;
-            }
-            nav {
-                padding: 20px 5%;
-            }
-            .nav-links {
-                display: none; /* Mobil menü basitleştirmesi */
-            }
+            .hero { flex-direction: column; text-align: center; padding-top: 120px; }
+            .hero-text h1 { font-size: 38px; }
+            .download-buttons { justify-content: center; flex-direction: column; }
+            nav { padding: 20px 5%; }
+            .nav-links { display: none; }
+            .rules-container { padding: 20px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigasyon Çubuğu -->
     <nav>
         <div class="logo">TrLive</div>
         <div class="nav-links">
             <a href="#features">Özellikler</a>
-            <a href="#about">Hakkımızda</a>
+            <a href="#rules">Topluluk Kuralları</a>
             <a href="#contact">Destek</a>
         </div>
     </nav>
 
-    <!-- Giriş Ekranı (Hero) -->
     <section class="hero">
         <div class="hero-text">
             <h1>Yeni Arkadaşlar Bul. Sesli Sohbetin Tadını Çıkar.</h1>
             <p>TrLive, dünyanın her yerinden insanlarla bağlantı kurabileceğiniz, tamamen ücretsiz ve güvenli bir sesli grup sohbeti ve canlı yayın platformudur.</p>
             <div class="download-buttons">
-                <a href="#" class="btn-download">
-                    <span>🤖 Google Play</span>
-                </a>
-                <a href="#" class="btn-download alt">
-                    <span>🍏 App Store</span>
-                </a>
+                <a href="#" class="btn-download"><span>🤖 Google Play</span></a>
+                <a href="#" class="btn-download alt"><span>🍏 App Store</span></a>
             </div>
         </div>
     </section>
 
-    <!-- Özellikler Alanı -->
+    <!-- Resmi Güvenlik Politikası Uyarısı -->
+    <div class="warning-banner">
+        <span>🔒</span>
+        <p><strong>7/24 Canlı İzleme Bildirimi:</strong> TrLive platformundaki tüm sesli odalar ve canlı yayın içerikleri, topluluk güvenliğini sağlamak amacıyla 7 gün 24 saat yapay zeka ve moderatör ekiplerimiz tarafından kesintisiz olarak izlenmektedir. Kurallara uymayan hesaplar kalıcı olarak askıya alınır.</p>
+    </div>
+
     <section class="features" id="features">
         <h2>Neden TrLive?</h2>
         <div class="feature-grid">
-            <!-- Kart 1 -->
             <div class="feature-card">
                 <div class="icon-box">👥</div>
                 <h3>Yeni Arkadaşlar Edin</h3>
-                <p>İlgi alanlarınıza uygun odaları bulun, insanları takip edin ve anında samimi sohbetlere başlayın.</p>
+                <p>İlgi alanlarınıza uygun odaları bulun, insanları takip edin incentives ve anında samimi sohbetlere başlayın.</p>
             </div>
-            <!-- Kart 2 -->
             <div class="feature-card">
                 <div class="icon-box">🎙️</div>
                 <h3>Sesli Canlı Yayın</h3>
                 <p>Kendi sesli yayın odanızı açın veya popüler yayınlara katılarak kesintisiz HD ses kalitesiyle sohbet edin.</p>
             </div>
-            <!-- Kart 3 -->
             <div class="feature-card">
                 <div class="icon-box">🎁</div>
                 <h3>Harika Sanal Hediyeler</h3>
@@ -274,18 +312,10 @@
         </div>
     </section>
 
-    <!-- Alt Bilgi (Footer) -->
-    <footer>
-        <div class="footer-left">
-            <p>&copy; 2026 TrLive. Tüm Hakları Saklıdır.</p>
-        </div>
-        <div class="footer-links">
-            <a href="#">Kullanım Şartları</a>
-            <a href="#">Gizlilik Politikası</a>
-            <a href="#">Çocuk Güvenliği</a>
-            <a href="#">Destek: cs@trlive.media</a>
-        </div>
-    </footer>
-
-</body>
-</html>
+    <!-- Yasaklar & Topluluk Kuralları Bölümü -->
+    <section class="rules-section" id="rules">
+        <div class="rules-container">
+            <h2>Topluluk Kuralları ve Yayın İlkeleri</h2>
+            <ul class="rules-list">
+                <li>❌ <strong>Yaş Sınırı:</strong> Platformu kullanabilmek için en az 18 yaşında olmanız gerekmektedir. Reşit olmayan kullanıcıların tespiti halinde hesaplar anında silinir.</li>
+                <li>❌ <strong>Uygunsuz İçerik & Ses:</strong> Cinsel içerikli konuşmalar, cinsel imalar, baştan çıkarıcı davranışlar ve hafif pornografi içeren tüm sesli yayınlar kesinlikle yasaktır.</li>
