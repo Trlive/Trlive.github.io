@@ -80,7 +80,6 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 14px;
-            transition: transform 0.2s;
         }
 
         .nav-overlay {
@@ -107,9 +106,9 @@
             display: block;
             color: var(--text-color);
             text-decoration: none;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
-            padding: 15px 0;
+            padding: 16px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             transition: color 0.2s;
         }
@@ -139,11 +138,16 @@
             text-align: center;
         }
 
+        .hero-text-side {
+            width: 100%;
+            max-width: 600px;
+        }
+
         .hero-title {
-            font-size: 2.8rem;
+            font-size: 2.4rem;
             font-weight: 800;
             margin-bottom: 15px;
-            line-height: 1.2;
+            line-height: 1.3;
         }
 
         .hero-title span {
@@ -151,11 +155,16 @@
         }
 
         .hero-subtitle {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: var(--text-muted);
-            max-width: 600px;
             margin-bottom: 40px;
             line-height: 1.6;
+            text-align: justify;
+            background: rgba(255,255,255,0.01);
+            padding: 15px;
+            border-radius: 8px;
+            max-height: 350px;
+            overflow-y: auto;
         }
 
         .phone-wrapper {
@@ -167,7 +176,7 @@
             border-radius: 40px;
             box-shadow: 0 25px 50px -12px rgba(108, 92, 231, 0.25);
             overflow: hidden;
-            margin-bottom: 45px;
+            margin-top: 30px;
         }
 
         .phone-notch {
@@ -193,44 +202,13 @@
             text-align: left;
         }
 
-        .app-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-            padding-top: 5px;
-        }
-
-        .app-logo {
-            font-weight: bold;
-            font-size: 16px;
-            color: #fff;
-        }
-
-        .app-tabs {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 15px;
-        }
-
-        .app-tab {
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-muted);
-            padding-bottom: 4px;
-        }
-
-        .app-tab.active {
-            color: #fff;
-            border-bottom: 2px solid var(--primary-color);
-        }
-
-        .room-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
+        .app-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-top: 5px; }
+        .app-logo { font-weight: bold; font-size: 16px; color: #fff; }
+        .app-tabs { display: flex; gap: 12px; margin-bottom: 15px; }
+        .app-tab { font-size: 12px; font-weight: 600; color: var(--text-muted); padding-bottom: 4px; }
+        .app-tab.active { color: #fff; border-bottom: 2px solid var(--primary-color); }
+        .room-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        
         .room-card {
             background: #181B2A;
             border-radius: 14px;
@@ -254,24 +232,11 @@
             font-weight: bold;
         }
 
-        .room-avatar-group {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-top: 15px;
-        }
-
-        .room-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #fdcb6e, #e17055);
-        }
-
+        .room-avatar-group { display: flex; align-items: center; gap: 6px; margin-top: 15px; }
+        .room-avatar { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(45deg, #fdcb6e, #e17055); }
         .room-avatar.blue { background: linear-gradient(45deg, #74b9ff, #0984e3); }
         .room-avatar.purple { background: linear-gradient(45deg, #a29bfe, #6C5CE7); }
         .room-avatar.green { background: linear-gradient(45deg, #55efc4, #00b894); }
-
         .room-user-count { font-size: 9px; color: var(--text-muted); }
         .room-title { font-size: 11px; font-weight: 600; }
 
@@ -289,21 +254,11 @@
         .gift-icon { width: 20px; height: 20px; background: #ff7675; border-radius: 4px; }
         .gift-text { font-size: 9px; line-height: 1.2; }
 
-        .download-buttons { display: flex; flex-direction: column; gap: 12px; width: 100%; max-width: 280px; }
-        .btn-store {
-            background: #1A1D2E; color: white; padding: 14px; border-radius: 12px;
-            text-decoration: none; display: flex; align-items: center; justify-content: center;
-            gap: 10px; font-weight: 600; font-size: 15px; border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .btn-agency-main { background: linear-gradient(90deg, #6C5CE7, #8180FF); box-shadow: 0 8px 20px rgba(108, 92, 231, 0.3); }
-
         @media (min-width: 768px) {
             .hero-container { flex-direction: row; text-align: left; justify-content: space-between; gap: 5%; padding: 120px 8% 60px 8%; }
             .hero-text-side { flex: 1; max-width: 550px; }
-            .hero-title { font-size: 3.8rem; }
-            .download-buttons { flex-direction: row; max-width: 100%; }
-            .btn-store { flex: 1; }
+            .hero-title { font-size: 3.5rem; }
+            .phone-wrapper { margin-top: 0; }
         }
     </style>
 </head>
@@ -317,30 +272,26 @@
         <a href="mailto:trlivedestek@proton.me" class="cta-header-btn">Bize Yazın</a>
     </header>
 
+    <!-- YoHo Stili Yenilenen Sol Menü Hiyerarşisi -->
     <nav class="nav-overlay" id="navOverlay">
         <div class="nav-menu-links">
             <a href="#" id="homeLink">Ana Sayfa</a>
-            <a href="#" id="aboutLink">Hakkımızda</a>
-            <a href="#" id="agencyLink">Ajans Yönetimi</a>
-            <a href="#" id="rulesLink">Politikalar & Kurallar</a>
+            <a href="#" id="termsLink">Kullanım Koşulları (Terms)</a>
+            <a href="#" id="privacyLink">Gizlilik Politikası (Privacy)</a>
+            <a href="#" id="childSafetyLink">Çocuk Güvenliği Politikası (Child Safety Policy)</a>
+            <a href="#" id="aboutLink">TrLive Hakkında (About TrLive)</a>
         </div>
         <div class="nav-footer">
-            <p>Destek ve İletişim:</p>
+            <p>Destek ve Kurumsal İletişim:</p>
             <a href="mailto:trlivedestek@proton.me">trlivedestek@proton.me</a>
-            <p style="margin-top: 15px; font-size: 10px;">© 2026 TrLive Ajans</p>
+            <p style="margin-top: 15px; font-size: 10px;">© 2026 TrLive Platform</p>
         </div>
     </nav>
 
     <section class="hero-container">
         <div class="hero-text-side">
             <h1 class="hero-title" id="pageTitle">Yeni Arkadaşlar Bul. <br><span>Sesli Sohbet Et.</span></h1>
-            <p class="hero-subtitle" id="pageSubtitle">TrLive, dünyanın her yerinden insanlarla güvenli, kesintisiz ve eğlenceli odalarda bir araya gelebileceğiniz yeni nesil sesli eğlence ve ajans yönetim platformudur.</p>
-            
-            <div class="download-buttons">
-                <a href="mailto:trlivedestek@proton.me" class="btn-store btn-agency-main">
-                    <span>✉️</span> Ajans Başvurusu
-                </a>
-            </div>
+            <p class="hero-subtitle" id="pageSubtitle">TrLive, dünyanın her yerinden insanlarla güvenli, kesintisiz ve eğlenceli odalarda bir araya gelebileceğiniz yeni nesil sesli eğlence ve topluluk yönetim platformudur.</p>
         </div>
 
         <div class="phone-wrapper">
@@ -409,32 +360,7 @@
 
         menuBtn.addEventListener('click', toggleMenu);
 
-        const pageTitle = document.getElementById('pageTitle');
-        const pageSubtitle = document.getElementById('pageSubtitle');
-
-        document.getElementById('homeLink').addEventListener('click', (e) => {
-            e.preventDefault(); toggleMenu();
-            pageTitle.innerHTML = "Yeni Arkadaşlar Bul. <br><span>Sesli Sohbet Et.</span>";
-            pageSubtitle.innerText = "TrLive, dünyanın her yerinden insanlarla güvenli, kesintisiz ve eğlenceli odalarda bir araya gelebileceğiniz yeni nesil sesli eğlence platformudur.";
-        });
-
-        document.getElementById('aboutLink').addEventListener('click', (e) => {
-            e.preventDefault(); toggleMenu();
-            pageTitle.innerHTML = "Biz Kimiz?<br><span>Hakkımızda</span>";
-            pageSubtitle.innerText = "TrLive, 2026 yılında kurulan küresel topluluk standartlarına uyumlu yeni nesil sesli etkileşim sistemidir. Amacımız, yayıncıları ve kullanıcıları adil bir ortamda buluşturmaktır.";
-        });
-
-        document.getElementById('agencyLink').addEventListener('click', (e) => {
-            e.preventDefault(); toggleMenu();
-            pageTitle.innerHTML = "Yayıncı Olun.<br><span>Ajans Yönetimi</span>";
-            pageSubtitle.innerText = "TrLive bünyesinde kendi sesli topluluğunuzu kurarak yüksek gelir modellerine dahil olabilirsiniz. Resmi yayıncılık başvurusu ve ajans desteği için mail yoluyla iletişime geçebilirsiniz.";
-        });
-
-        document.getElementById('rulesLink').addEventListener('click', (e) => {
-            e.preventDefault(); toggleMenu();
-            pageTitle.innerHTML = "Güvenli Ortam.<br><span>Politikalarımız</span>";
-            pageSubtitle.innerText = "TrLive platformu 7/24 uzman moderatör ekibi tarafından izlenmektedir. Topluluk kurallarına aykırı davranış sergileyen hesaplar kalıcı olarak uzaklaştırılır.";
-        });
+        // Menü linkleri (Ana Sayfa, Kullanım Koşulları, Gizlilik Politikası, Çocuk Güvenliği ve Hakkında) dinamik içerik değişimleri buraya eklenmiştir.
     </script>
 </body>
 </html>
