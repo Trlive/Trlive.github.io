@@ -1,157 +1,163 @@
 
-document.addEventListener("DOMContentLoaded", function () {
-
-  // YIL
-  const yearElement = document.getElementById("currentYear");
-
-  if (yearElement) {
-    yearElement.textContent = new Date().getFullYear();
-  }
-
-  // TELEFON EKRANLARI
-  const phones = Array.from(document.querySelectorAll(".phone"));
-  const dots = Array.from(document.querySelectorAll(".screen-dot"));
-  const screenLabel = document.getElementById("screenLabel");
-
-  const screenNames = {
-    tr: ["Anasayfa", "Sesli Oda", "Görüntülü Oda", "Kullanıcı Profili"],
-    en: ["Home", "Audio Room", "Video Room", "User Profile"]
-  };
-
-  let currentScreen = 0;
-  let autoSlide;
-
-  function getLanguage() {
-    return document.documentElement.lang === "en" ? "en" : "tr";
-  }
-
-  function showScreen(index) {
-    if (!phones.length) return;
-
-    currentScreen = (index + phones.length) % phones.length;
-
-    phones.forEach(function (phone, i) {
-      phone.classList.toggle("active", i === currentScreen);
-      phone.setAttribute(
-        "aria-hidden",
-        i === currentScreen ? "false" : "true"
-      );
-    });
-
-    dots.forEach(function (dot, i) {
-      dot.classList.toggle("active", i === currentScreen);
-      dot.setAttribute(
-        "aria-pressed",
-        i === currentScreen ? "true" : "false"
-      );
-    });
-
-    if (screenLabel) {
-      screenLabel.textContent =
-        screenNames[getLanguage()][currentScreen] || "";
-    }
-  }
-
-  function startAutoSlide() {
-    clearInterval(autoSlide);
-
-    if (phones.length > 1) {
-      autoSlide = setInterval(function () {
-        showScreen(currentScreen + 1);
-      }, 3500);
-    }
-  }
-
-  dots.forEach(function (dot) {
-    dot.addEventListener("click", function () {
-      const selected = Number(dot.dataset.screen);
-
-      showScreen(selected);
-      startAutoSlide();
-    });
-  });
-
-  showScreen(0);
-  startAutoSlide();
-
-  // DİL DEĞİŞTİRME
-  const languageSelect = document.getElementById("languageSelect");
-
-  function changeLanguage(language) {
-    const selectedLanguage = language === "en" ? "en" : "tr";
-
-    document.documentElement.lang = selectedLanguage;
-
-    document.querySelectorAll("[data-tr][data-en]").forEach(function (element) {
-      const content = element.getAttribute("data-" + selectedLanguage);
-
-      if (content !== null) {
-        element.innerHTML = content;
-      }
-    });
-
-    if (languageSelect) {
-      languageSelect.value = selectedLanguage;
-    }
-
-    showScreen(currentScreen);
-  }
-
-  if (languageSelect) {
-    languageSelect.addEventListener("change", function () {
-      changeLanguage(languageSelect.value);
-    });
-  }
+(() => {
+  "use strict";
 
   // MOBİL MENÜ
-  const menuToggle = document.getElementById("menuToggle");
-  const navigation = document.getElementById("navigation");
+  const menuButton = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".nav");
 
-  if (menuToggle && navigation) {
-    menuToggle.addEventListener("click", function () {
-      navigation.classList.toggle("open");
-
-      const isOpen = navigation.classList.contains("open");
-
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-      menuToggle.textContent = isOpen ? "✕" : "☰";
+  if (menuButton && nav) {
+    menuButton.addEventListener("click", () => {
+      const isOpen = nav.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
     });
 
-    navigation.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", function () {
-        navigation.classList.remove("open");
-        menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.textContent = "☰";
+    nav.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
       });
     });
   }
 
-  // TELEFON EKRANLARINDA DOKUNMATİK GEÇİŞ
-  const phoneStage = document.querySelector(".phone-stage");
+  // TÜRKÇE / İNGİLİZCE DİL DEĞİŞTİRME
+  const langButton = document.querySelector(".lang-toggle");
+  let language = "tr";
 
-  if (phoneStage) {
-    let touchStartX = 0;
-    let touchEndX = 0;
+  if (langButton) {
+    langButton.addEventListener("click", () => {
+      language = language === "tr" ? "en" : "tr";
+      document.documentElement.lang = language;
 
-    phoneStage.addEventListener("touchstart", function (event) {
-      touchStartX = event.changedTouches[0].screenX;
+      document.querySelectorAll("[data-tr][data-en]").forEach(element => {
+        element.innerHTML = element.dataset[language];
+      });
+
+      langButton.textContent = language === "tr" ? "EN" : "TR";
+    });
+  }
+
+  // TELEFON EKRANLARI
+  const slides = [
+    {
+      name: "Anasayfa",
+      kicker: "DISCOVER",
+      title: "Find your<br>live community",
+      card: "Popular rooms",
+      small: "Join the conversation",
+      kind: "home"
+    },
+    {
+      name: "Sesli oda",
+      kicker: "VOICE ROOM",
+      title: "Voices bring<br>us together",
+      card: "Live voice room",
+      small: "Join and share your voice",
+      kind: "voice"
+    },
+    {
+      name: "Görüntülü oda",
+      kicker: "VIDEO ROOM",
+      title: "Meet face<br>to face",
+      card: "Video live room",
+      small: "Connect in real time",
+      kind: "video"
+    },
+    {
+      name: "Kullanıcı profili",
+      kicker: "YOUR PROFILE",
+      title: "Your space.<br>Your identity.",
+      card: "Personal profile",
+      small: "Make it yours",
+      kind: "profile"
+    }
+  ];
+
+  let current = 0;
+  const screenContent = document.getElementById("screenContent");
+  const slideName = document.getElementById("slideName");
+  const dots = Array.from(document.querySelectorAll(".dot"));
+
+  function renderSlide() {
+    if (!screenContent) return;
+
+    const slide = slides[current];
+
+    screenContent.style.opacity = "0";
+
+    window.setTimeout(() => {
+      screenContent.innerHTML = `
+        <div class="screen-brand">TR <b>LIVE</b></div>
+        <p class="screen-kicker">${slide.kicker}</p>
+        <h3>${slide.title}</h3>
+        <div class="screen-card ${slide.kind}">
+          <div class="screen-people">
+            <i></i><i></i><i></i>
+          </div>
+          <b>${slide.card}</b>
+          <small>${slide.small}</small>
+        </div>
+        <div class="screen-lines">
+          <i></i><i></i><i></i>
+        </div>
+      `;
+
+      screenContent.style.opacity = "1";
+    }, 150);
+
+    if (slideName) {
+      slideName.textContent = slide.name;
+    }
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === current);
+    });
+  }
+
+  function goToSlide(index) {
+    current = (index + slides.length) % slides.length;
+    renderSlide();
+  }
+
+  // SAĞ VE SOL OKLAR
+  document.querySelector(".slide-arrow.prev")
+    ?.addEventListener("click", () => goToSlide(current - 1));
+
+  document.querySelector(".slide-arrow.next")
+    ?.addEventListener("click", () => goToSlide(current + 1));
+
+  // NOKTALARA DOKUNARAK GEÇİŞ
+  dots.forEach((dot, index) => {
+    dot.addEventListener("click", () => goToSlide(index));
+  });
+
+  // TELEFONDA PARMAKLA SAĞA / SOLA KAYDIRMA
+  const deviceScreen = document.querySelector(".device-screen");
+  let touchStartX = null;
+
+  if (deviceScreen) {
+    deviceScreen.addEventListener("touchstart", event => {
+      touchStartX = event.touches[0].clientX;
     }, { passive: true });
 
-    phoneStage.addEventListener("touchend", function (event) {
-      touchEndX = event.changedTouches[0].screenX;
+    deviceScreen.addEventListener("touchend", event => {
+      if (touchStartX === null) return;
 
-      const difference = touchEndX - touchStartX;
+      const difference = event.changedTouches[0].clientX - touchStartX;
 
-      if (Math.abs(difference) > 45) {
-        showScreen(
-          difference < 0
-            ? currentScreen + 1
-            : currentScreen - 1
-        );
-
-        startAutoSlide();
+      if (Math.abs(difference) > 35) {
+        goToSlide(current + (difference < 0 ? 1 : -1));
       }
+
+      touchStartX = null;
     }, { passive: true });
   }
 
-});
+  // OTOMATİK GEÇİŞ: 5 SANİYEDE BİR
+  if (screenContent) {
+    renderSlide();
+    window.setInterval(() => {
+      goToSlide(current + 1);
+    }, 5000);
+  }
+})();
